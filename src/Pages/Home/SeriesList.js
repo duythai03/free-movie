@@ -38,7 +38,7 @@ function SeriesList() {
               <img
                 src={`https://img.phimapi.com/${movie.poster_url}`}
                 alt={movie.name}
-                className="w-[150px] h-[210px] object-cover"
+                className="w-[150px] h-[210px] object-cover transition-transform duration-300 ease-in-out hover:scale-105"
               />
               <p className="text-sm font-semibold mt-2 text-center line-clamp-2 mb-7 md:mb-0">
                 {movie.name}

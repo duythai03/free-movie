@@ -8,7 +8,7 @@ function Footer() {
           <h2 className="font-bold text-lg">FREEMOVIE</h2>
           <p className="mt-4">
             Trang web cung cấp thông tin về các bộ phim mới nhất, phim hot và
-            nhiều hơn nữa. Made by Logan :>
+            nhiều hơn nữa. Made by Logan :3
           </p>
         </div>
         <div>
