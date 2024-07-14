@@ -13,7 +13,7 @@ function Header() {
   return (
     <div className="h-[80px] px-6 flex justify-between items-center bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue md:h-[100px] md:px-[70px] ">
       <ul className="flex flex-row text-xl items-center">
-        <Link to="/">
+        <Link to="/free-movie">
           <li className="mr-9 cursor-pointer font-bold md:text-3xl">
             FREEMOVIE
           </li>

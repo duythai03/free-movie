@@ -71,7 +71,7 @@ function Movie() {
         .get(`https://phimapi.com/v1/api/danh-sach/${type}`)
         .then((res) => {
           if (res.data.status) {
-            const limitedMovies = res.data.data.items.slice(0, 5);
+            const limitedMovies = res.data.data.items.slice(0, 6);
             setMovies(limitedMovies);
           } else {
             setError("Failed to fetch movies");
