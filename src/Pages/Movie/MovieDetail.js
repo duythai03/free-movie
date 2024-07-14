@@ -62,7 +62,7 @@ function Movie() {
       } else if (movie && movie.type === "series") {
         type = "phim-bo";
       } else if (movie && movie.type === "tvshows") {
-        type = "tv-show";
+        type = "tv-shows";
       } else {
         type = "phim-moi-cap-nhat";
       }
