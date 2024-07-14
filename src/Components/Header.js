@@ -1,5 +1,6 @@
 import React from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Header() {
   const scrollToSection = (id) => {
@@ -12,7 +13,11 @@ function Header() {
   return (
     <div className="h-[80px] px-6 flex justify-between items-center bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue md:h-[100px] md:px-[70px] ">
       <ul className="flex flex-row text-xl items-center">
-        <li className="mr-9 cursor-pointer font-bold md:text-3xl">FREEMOVIE</li>
+        <Link to="/">
+          <li className="mr-9 cursor-pointer font-bold md:text-3xl">
+            FREEMOVIE
+          </li>
+        </Link>
         <li
           className="mr-9 cursor-pointer hidden md:block"
           onClick={() => scrollToSection("tvshows")}
