@@ -135,6 +135,8 @@ function Movie() {
             </div>
             <hr className="my-6 bg-gray-400 opacity-[0.2]" />
             <div className="grid grid-cols-2">
+              <div className="text-light-text">Tên đầy đủ:</div>
+              <div className="text-light-text">{movie.name}</div>
               <div className="text-light-text">Thể loại:</div>
               <div className="text-light-text">
                 {movie.category.map((category) => (
