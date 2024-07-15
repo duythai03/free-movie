@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 function OtherMovies() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { type_list } = useParams();
+  const moviesContainerRef = useRef(null);
 
   useEffect(() => {
     axios
@@ -21,15 +22,22 @@ function OtherMovies() {
       .then((res) => {
         if (res.data.status) {
           setMovies(res.data.data.items);
+          setTotalPages(res.data.data.params.pagination.totalPages);
         } else {
-          setError("cập nhập thất bại");
+          setError("Cập nhật thất bại");
         }
         setLoading(false);
       })
       .catch((error) => {
-        setError(error);
+        setError(error.message);
         setLoading(false);
       });
+  }, [currentPage, type_list]);
+
+  useEffect(() => {
+    if (moviesContainerRef.current) {
+      moviesContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [currentPage]);
 
   let type;
@@ -43,7 +51,7 @@ function OtherMovies() {
     case "hoat-hinh":
       type = "phim hoạt hình";
       break;
-    case "tv-show":
+    case "tv-shows":
       type = "TV Show";
       break;
     default:
@@ -51,16 +59,22 @@ function OtherMovies() {
       break;
   }
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className="">
+    <div className="min-h-screen flex flex-col">
       <Header />
       {loading && <div className="flex-grow">Loading...</div>}
       {error && <div className="flex-grow">{error}</div>}
-      {console.log(movies)}
       {!loading && !error && movies && (
-        <div className="px-2 md:px-[70px] md:mb-16">
-          <div className="text-xl font-bold mt-4 ml-3 md:ml-[60px]">
-            Danh sách {type}
+        <div className="px-2 md:px-[70px]">
+          <div
+            className="text-xl font-bold mt-4 ml-3 md:ml-[60px]"
+            ref={moviesContainerRef}
+          >
+            Danh sách {type} - Trang {currentPage}
           </div>
           <ul className="grid grid-cols-2 gap-y-2 md:gap-y-16 md:grid-cols-5 justify-items-center mt-8 md:ml-0">
             {movies.map((movie) => (
@@ -78,6 +92,11 @@ function OtherMovies() {
               </li>
             ))}
           </ul>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
       <Footer />

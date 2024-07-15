@@ -4,14 +4,15 @@ import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function RecentMovies() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const moviesContainerRef = useRef(null);
   useEffect(() => {
     axios
       .get(
@@ -20,6 +21,7 @@ function RecentMovies() {
       .then((res) => {
         if (res.data.status) {
           setMovies(res.data.items);
+          setTotalPages(res.data.pagination.totalPages);
         } else {
           setError("cập nhập thất bại");
         }
@@ -31,16 +33,26 @@ function RecentMovies() {
       });
   }, [currentPage]);
 
+  useEffect(() => {
+    if (moviesContainerRef.current) {
+      moviesContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <div className="">
+    <div className="min-h-screen flex flex-col">
       <Header />
       {loading && <div className="flex-grow">Loading...</div>}
       {error && <div className="flex-grow">{error}</div>}
       {console.log(movies)}
       {!loading && !error && movies && (
-        <div className="px-2 md:px-[70px] md:mb-16">
+        <div className="px-2 md:px-[70px]" ref={moviesContainerRef}>
           <div className="text-xl font-bold mt-4 ml-3 md:ml-[60px]">
-            Danh sách phim mới
+            Danh sách phim mới - Trang {currentPage}
           </div>
           <ul className="grid grid-cols-2 gap-y-2 md:gap-y-16 md:grid-cols-5 justify-items-center mt-8 md:ml-0">
             {movies.map((movie) => (
@@ -58,6 +70,11 @@ function RecentMovies() {
               </li>
             ))}
           </ul>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       )}
       <Footer />
