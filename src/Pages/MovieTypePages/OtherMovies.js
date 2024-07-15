@@ -85,21 +85,24 @@ function OtherMovies() {
       {!loading && !error && movies && (
         <div className="px-2 md:px-[70px]">
           <div
-            className="text-xl font-bold mt-4 ml-3 md:ml-[60px]"
+            className="text-xl font-semibold mt-4 ml-3 md:ml-[40px]"
             ref={moviesContainerRef}
           >
             Danh sách {type} - Trang {currentPage}
           </div>
-          <ul className="grid grid-cols-2 gap-y-2 md:gap-y-16 md:grid-cols-5 justify-items-center mt-8 md:ml-0">
+          <ul className="grid grid-cols-2 gap-y-9 md:gap-y-16 md:grid-cols-6 justify-items-center mt-8 md:ml-0">
             {movies.map((movie) => (
-              <li className="w-[150px] h md:h-[230px]" key={movie._id}>
+              <li
+                className="w-[150px] md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+                key={movie._id}
+              >
                 <Link to={`/movie/${movie.slug}`}>
                   <img
                     src={`https://img.phimapi.com/${movie.poster_url}`}
                     alt={movie.name}
-                    className="w-[150px] h-[210px] object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                    className="w-[150px] h-[210px] object-cover"
                   />
-                  <p className="text-sm mb-7 font-semibold mt-2 text-center line-clamp-2 md:mb-0">
+                  <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 md:mb-0">
                     {movie.name}
                   </p>
                 </Link>

@@ -39,18 +39,21 @@ function TvshowList() {
           </i>
         </div>
       </Link>
-      <ul className="grid grid-cols-2 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
+      <ul className="grid grid-cols-2 gap-y-10 mb-12 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
         {movies.map((movie) => (
-          <li className="w-[150px] h md:h-[230px]" key={movie._id}>
+          <li
+            className="w-[150px] h md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+            key={movie._id}
+          >
             <Link to={`/movie/${movie.slug}`}>
               <img
                 src={`https://img.phimapi.com/${movie.poster_url}`}
                 alt={movie.name}
-                className="w-[150px] h-[210px] object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                className="w-[150px] h-[210px] object-cover"
               />
-              <p className="text-sm font-semibold mt-2 text-center line-clamp-2 mb-7 md:mb-0">
+              <div className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 md:mb-0">
                 {movie.name}
-              </p>
+              </div>
             </Link>
           </li>
         ))}

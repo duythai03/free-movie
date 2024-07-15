@@ -1,6 +1,7 @@
 import React from "react";
 import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
+import Logo from "../assets/FreeMovieLogo.png";
 
 function Header() {
   const scrollToSection = (id) => {
@@ -14,40 +15,42 @@ function Header() {
     <div className="h-[80px] px-6 flex justify-between items-center bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue md:h-[100px] md:px-[70px] ">
       <ul className="flex flex-row text-xl items-center">
         <Link to="/free-movie">
-          <li className="mr-9 cursor-pointer font-bold md:text-3xl">
-            FREEMOVIE
-          </li>
+          <img
+            src={Logo}
+            alt="FreeMovie"
+            className="h-[45px] md:h-[50px] w-auto mr-9"
+          />
         </Link>
         <Link to="/type/tv-shows">
           <li
-            className="mr-9 cursor-pointer hidden md:block"
+            className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("tvshows")}
           >
-            TV Show
+            TV SHOW
           </li>
         </Link>
         <Link to="/type/phim-le">
           <li
-            className="mr-9 cursor-pointer hidden md:block"
+            className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("movies")}
           >
-            Phim điện ảnh
+            PHIM ĐIỆN ẢNH
           </li>
         </Link>
         <Link to="/type/phim-bo">
           <li
-            className="mr-9 cursor-pointer hidden md:block"
+            className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("series")}
           >
-            Phim bộ
+            PHIM BỘ
           </li>
         </Link>
         <Link to="/type/hoat-hinh">
           <li
-            className="cursor-pointer hidden md:block"
+            className="cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("cartoons")}
           >
-            Hoạt hình
+            HOẠT HÌNH
           </li>
         </Link>
       </ul>
