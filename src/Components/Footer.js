@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer id="contact" className="bg-medium-blue text-white pt-8 mt-8 pb-6">
+    <footer className="bg-medium-blue text-white pt-8 mt-8 pb-6">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
         <div className="md:pl-12 text-center md:text-start">
           <h2 className="font-bold text-lg">FREEMOVIE</h2>

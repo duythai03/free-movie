@@ -18,30 +18,38 @@ function Header() {
             FREEMOVIE
           </li>
         </Link>
-        <li
-          className="mr-9 cursor-pointer hidden md:block"
-          onClick={() => scrollToSection("tvshows")}
-        >
-          TV Show
-        </li>
-        <li
-          className="mr-9 cursor-pointer hidden md:block"
-          onClick={() => scrollToSection("movies")}
-        >
-          Phim điện ảnh
-        </li>
-        <li
-          className="mr-9 cursor-pointer hidden md:block"
-          onClick={() => scrollToSection("series")}
-        >
-          Phim bộ
-        </li>
-        <li
-          className="cursor-pointer hidden md:block"
-          onClick={() => scrollToSection("contact")}
-        >
-          Liên hệ
-        </li>
+        <Link to="/type/tv-shows">
+          <li
+            className="mr-9 cursor-pointer hidden md:block"
+            onClick={() => scrollToSection("tvshows")}
+          >
+            TV Show
+          </li>
+        </Link>
+        <Link to="/type/phim-le">
+          <li
+            className="mr-9 cursor-pointer hidden md:block"
+            onClick={() => scrollToSection("movies")}
+          >
+            Phim điện ảnh
+          </li>
+        </Link>
+        <Link to="/type/phim-bo">
+          <li
+            className="mr-9 cursor-pointer hidden md:block"
+            onClick={() => scrollToSection("series")}
+          >
+            Phim bộ
+          </li>
+        </Link>
+        <Link to="/type/hoat-hinh">
+          <li
+            className="cursor-pointer hidden md:block"
+            onClick={() => scrollToSection("cartoons")}
+          >
+            Hoạt hình
+          </li>
+        </Link>
       </ul>
       <div className="flex relative">
         <input

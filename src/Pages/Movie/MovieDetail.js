@@ -100,7 +100,7 @@ function Movie() {
       {loading && <div className="flex-grow">Loading...</div>}
       {error && <div className="flex-grow">{error}</div>}
       {!loading && !error && movie && (
-        <div className="mt-3 md:mt-6 flex flex-col md:flex-row">
+        <div className="my-3 md:mt-6 flex flex-col md:flex-row">
           <div className="w-full md:w-3/12 px-2 md:ml-6 md:px-0">
             <img src={movie.poster_url} alt={movie.name} className="w-full" />
             <div className="mt-3 line-clamp-1 text-xl font-semibold">
@@ -182,8 +182,9 @@ function Movie() {
               </div>
             )}
 
+            {/* Gợi ý phim */}
             <div className="mt-12">
-              <div className="text-xl font-semibold">Gợi ý phim</div>
+              <div className="text-xl font-semibold">Có thể bạn sẽ thích</div>
               <ul className="grid grid-cols-2 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
                 {movies.map((movie) => (
                   <li className="w-[150px] h md:h-[230px]" key={movie._id}>

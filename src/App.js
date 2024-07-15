@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
 import Home from "./Pages/Home/Home.js";
 import MovieDetail from "./Pages/Movie/MovieDetail.js";
+import RecentMovies from "./Pages/MovieTypePages/RecentMovies.js";
+import OtherMovies from "./Pages/MovieTypePages/OtherMovies.js";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
         <Routes>
           <Route path="/free-movie" element={<Home />} />
           <Route path="/movie/:slug" element={<MovieDetail />} />
+          <Route path="/recent-movies" element={<RecentMovies />} />
+          <Route path="/type/:type_list" element={<OtherMovies />} />
         </Routes>
       </Router>
     </div>

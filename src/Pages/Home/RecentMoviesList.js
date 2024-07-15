@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaAnglesRight } from "react-icons/fa6";
 
 function RecentMoviesList() {
   const [movies, setMovies] = useState([]);
@@ -30,7 +31,16 @@ function RecentMoviesList() {
   console.log(movies);
   return (
     <div className="md:px-[70px] mt-8 h-auto">
-      <h2 className="ml-6 text-xl font-semibold md:ml-2">Phim mới nổi bật</h2>
+      <div className="flex items-center">
+        <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">
+          Phim mới nổi bật
+        </h2>
+        <Link to="/recent-movies">
+          <i className="text-2xl  cursor-pointer opacity-[0.8] hover:opacity-100">
+            <FaAnglesRight style={{ transform: "translateY(2px)" }} />
+          </i>
+        </Link>
+      </div>
       <ul className="grid grid-cols-2 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
         {movies.map((movie) => (
           <li className="w-[150px] h md:h-[230px]" key={movie._id}>
