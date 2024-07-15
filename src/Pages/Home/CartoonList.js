@@ -26,8 +26,7 @@ function CartoonList() {
         setLoading(false);
       });
   }, []);
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+
   console.log(movies);
   return (
     <div id="cartoons" className="md:px-[70px] mt-8 h-auto">

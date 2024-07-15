@@ -1,5 +1,5 @@
 import React from "react";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import SearchInput from "./SearchInput";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -51,16 +51,7 @@ function Header() {
           </li>
         </Link>
       </ul>
-      <div className="flex relative">
-        <input
-          type="text"
-          placeholder="Tìm kiếm phim..."
-          className="w-40 p-1 pl-3 rounded-full text-black border border-gray-300 focus:outline-none md:w-80 md:p-2 md:pl-6"
-        />
-        <i className="absolute right-[2px] text-xl text-gray-500 cursor-pointer px-[12px] py-[10px] hidden md:block">
-          <FaMagnifyingGlass />
-        </i>
-      </div>
+      <SearchInput />
     </div>
   );
 }

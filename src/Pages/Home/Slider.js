@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import loadingGif from "../../assets/loading.gif";
 
 function Slider() {
   const [movies, setMovies] = useState([]);
@@ -90,13 +91,6 @@ function Slider() {
     startInterval();
     return () => clearInterval(intervalRef.current);
   }, [totalItem]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div className="w-full overflow-hidden relative">

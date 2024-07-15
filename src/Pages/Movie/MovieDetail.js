@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import VideoPlayer from "../../Components/VideoPlayer";
+import LoadingGif from "../../assets/loading.gif";
 
 function Movie() {
   const { slug } = useParams();
@@ -97,7 +98,15 @@ function Movie() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      {loading && <div className="flex-grow">Loading...</div>}
+      {loading && (
+        <div className="flex-grow flex justify-center items-center">
+          <img
+            src={LoadingGif}
+            alt="Loading..."
+            className="w-[100px] h-[100px]"
+          />
+        </div>
+      )}
       {error && <div className="flex-grow">{error}</div>}
       {!loading && !error && movie && (
         <div className="my-3 md:mt-6 flex flex-col md:flex-row">

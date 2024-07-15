@@ -4,6 +4,7 @@ import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
+import LoadingGif from "../../assets/loading.gif";
 
 function OtherMovies() {
   const [movies, setMovies] = useState([]);
@@ -13,6 +14,11 @@ function OtherMovies() {
   const [error, setError] = useState(null);
   const { type_list } = useParams();
   const moviesContainerRef = useRef(null);
+
+  useEffect(() => {
+    // Reset currentPage to 1 whenever type_list changes
+    setCurrentPage(1);
+  }, [type_list]);
 
   useEffect(() => {
     axios
@@ -66,7 +72,15 @@ function OtherMovies() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      {loading && <div className="flex-grow">Loading...</div>}
+      {loading && (
+        <div className="flex-grow flex justify-center items-center">
+          <img
+            src={LoadingGif}
+            alt="Loading..."
+            className="w-[100px] h-[100px]"
+          />
+        </div>
+      )}
       {error && <div className="flex-grow">{error}</div>}
       {!loading && !error && movies && (
         <div className="px-2 md:px-[70px]">
