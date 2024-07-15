@@ -31,14 +31,15 @@ function TvshowList() {
   console.log(movies);
   return (
     <div id="tvshows" className="md:px-[70px] mt-8 h-auto">
-      <div className="flex items-center">
-        <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">Tv show</h2>
-        <Link to={`/type/tv-shows`}>
+      <Link to={`/type/tv-shows`}>
+        <div className="flex items-center">
+          <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">Tv show</h2>
+
           <i className="text-2xl  cursor-pointer opacity-[0.8] hover:opacity-100">
             <FaAnglesRight style={{ transform: "translateY(2px)" }} />
           </i>
-        </Link>
-      </div>
+        </div>
+      </Link>
       <ul className="grid grid-cols-2 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
         {movies.map((movie) => (
           <li className="w-[150px] h md:h-[230px]" key={movie._id}>

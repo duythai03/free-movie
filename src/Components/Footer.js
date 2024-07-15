@@ -12,11 +12,8 @@ function Footer() {
           </p>
         </div>
         <div>
-          <h2 className="font-bold text-lg">Liên kết hữu ích</h2>
+          <h2 className="font-bold text-lg">Cung cấp thông tin</h2>
           <ul className="mt-4 space-y-2 text-center md:text-start">
-            <li>
-              <div className="hover:underline cursor-pointer">Trang chủ</div>
-            </li>
             <li>
               <div className="hover:underline cursor-pointer">Phim mới</div>
             </li>
