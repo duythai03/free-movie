@@ -22,7 +22,6 @@ function VideoPlayer({ selectedEpisode }) {
       autoplay: false,
       controls: true,
       fluid: true,
-      playbackRates: [0.5, 1, 1.5, 2],
       controlBar: {
         skipButtons: {
           forward: 10, // Tua tới 10 giây
