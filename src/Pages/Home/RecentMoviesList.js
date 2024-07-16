@@ -31,12 +31,12 @@ function RecentMoviesList() {
   return (
     <div className="md:px-[70px] mt-8 h-auto">
       <Link to="/recent-movies">
-        <div className="flex items-center">
-          <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">
+        <div className="flex items-center opacity-[0.9] hover:opacity-100">
+          <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2 ">
             Phim mới nổi bật
           </h2>
 
-          <i className="text-2xl  cursor-pointer opacity-[0.8] hover:opacity-100">
+          <i className="text-2xl  cursor-pointer">
             <FaAnglesRight style={{ transform: "translateY(2px)" }} />
           </i>
         </div>

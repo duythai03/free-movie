@@ -23,7 +23,7 @@ function Movie() {
   const [episodes, setEpisodes] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [videoPlayerKey, setVideoPlayerKey] = useState(0);
-  const [movieLoaded, setMovieLoaded] = useState(false); // New state to track movie loading
+  const [movieLoaded, setMovieLoaded] = useState(false);
 
   useEffect(() => {
     axios
@@ -37,7 +37,7 @@ function Movie() {
             .flat();
           setEpisodes(allServerData);
           setSelectedEpisode(allServerData[0]);
-          setMovieLoaded(true); // Set movieLoaded to true after movie is set
+          setMovieLoaded(true);
 
           console.log(res.data.movie);
           console.log(allServerData);
@@ -54,7 +54,6 @@ function Movie() {
 
   useEffect(() => {
     if (movieLoaded) {
-      // Only fetch recommend movies if movieLoaded is true
       let type = "phim-moi-cap-nhat";
       if (movie && movie.type === "hoathinh") {
         type = "hoat-hinh";
@@ -87,9 +86,8 @@ function Movie() {
   }, [movieLoaded, movie]);
 
   useEffect(() => {
-    // Increment key to force remount VideoPlayer
     setVideoPlayerKey((prevKey) => prevKey + 1);
-  }, [episodes]); // Re-render VideoPlayer when episodes change
+  }, [episodes]);
 
   const handleEpisodeClick = (episode) => {
     setSelectedEpisode(episode);
@@ -168,7 +166,7 @@ function Movie() {
               </i>
             </div>
           </div>
-          <div className="w-full md:w-9/12 md:ml-6 md:mr-8 md:px-0 mt-6 md:mt-0 px-2 md:px-0">
+          <div className="w-full md:w-9/12 md:ml-6 md:mr-8 md:px-0 mt-6 md:mt-0 px-2">
             <VideoPlayer
               key={videoPlayerKey}
               selectedEpisode={selectedEpisode}
@@ -177,7 +175,13 @@ function Movie() {
             {episodes.length > 1 && (
               <div className="mt-4">
                 <div className="text-xl font-semibold mb-2">Các tập:</div>
-                <ul className="grid grid-cols-4 gap-3 md:grid-cols-10">
+                <ul
+                  className={`${
+                    episodes.length > 30
+                      ? "h-96 overflow-y-scroll scrollbar-hide"
+                      : ""
+                  } grid grid-cols-4 gap-3 md:grid-cols-10`}
+                >
                   {episodes.map((episode, index) => (
                     <li
                       key={index}

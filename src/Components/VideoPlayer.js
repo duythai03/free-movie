@@ -7,15 +7,14 @@ function VideoPlayer({ selectedEpisode }) {
   const playerRef = useRef(null);
 
   useEffect(() => {
-    // Initialize the video.js player
     const firstEpisode = selectedEpisode.link_m3u8;
     if (!videoRef.current) return;
+
     if (playerRef.current) {
       playerRef.current.src({
         src: firstEpisode,
         type: "application/x-mpegURL",
       });
-      console.log(playerRef.current.src);
       return;
     }
 
@@ -23,6 +22,13 @@ function VideoPlayer({ selectedEpisode }) {
       autoplay: false,
       controls: true,
       fluid: true,
+      playbackRates: [0.5, 1, 1.5, 2],
+      controlBar: {
+        skipButtons: {
+          forward: 10, // Tua tới 10 giây
+          backward: 10, // Tua lùi 10 giây
+        },
+      },
     });
 
     playerRef.current = player;
@@ -33,16 +39,15 @@ function VideoPlayer({ selectedEpisode }) {
     });
 
     return () => {
-      if (!playerRef.current || player.on === undefined) {
+      if (!playerRef.current) {
         playerRef.current.dispose();
-        console.log("dispose");
         playerRef.current = null;
       }
     };
   }, [selectedEpisode]);
 
   return (
-    <div>
+    <div className="relative">
       <video
         ref={videoRef}
         className="video-js vjs-default-skin w-full h-full"
