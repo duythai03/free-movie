@@ -5,6 +5,7 @@ import MovieDetail from "./Pages/Movie/MovieDetail.js";
 import RecentMovies from "./Pages/MovieTypePages/RecentMovies.js";
 import OtherMovies from "./Pages/MovieTypePages/OtherMovies.js";
 import SearchResults from "./Pages/Search/SearchResults.js";
+import Test from "./Pages/Test/Test.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/recent-movies" element={<RecentMovies />} />
           <Route path="/type/:type_list" element={<OtherMovies />} />
           <Route path="/search/:search_query" element={<SearchResults />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </Router>
     </div>

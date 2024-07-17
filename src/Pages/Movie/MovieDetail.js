@@ -14,6 +14,16 @@ import Footer from "../../Components/Footer";
 import VideoPlayer from "../../Components/VideoPlayer";
 import LoadingGif from "../../assets/loading.gif";
 
+import "@vidstack/react/player/styles/default/theme.css";
+import "@vidstack/react/player/styles/default/layouts/audio.css";
+import "@vidstack/react/player/styles/default/layouts/video.css";
+
+import { MediaPlayer, MediaProvider, Poster, Track } from "@vidstack/react";
+import {
+  DefaultVideoLayout,
+  defaultLayoutIcons,
+} from "@vidstack/react/player/layouts/default";
+
 function Movie() {
   const { slug } = useParams();
   const [movie, setMovie] = useState(null);
@@ -167,10 +177,24 @@ function Movie() {
             </div>
           </div>
           <div className="w-full md:w-9/12 md:ml-6 md:mr-8 md:px-0 mt-6 md:mt-0 px-2">
-            <VideoPlayer
-              key={videoPlayerKey}
-              selectedEpisode={selectedEpisode}
-            />
+            <MediaPlayer
+              src={selectedEpisode.link_m3u8}
+              viewType="video"
+              streamType="on-demand"
+              logLevel="warn"
+              crossOrigin
+              playsInline
+              title={movie.name}
+              poster={movie.poster_url}
+            >
+              <MediaProvider>
+                <Poster className="vds-poster" />
+              </MediaProvider>
+              <DefaultVideoLayout
+                thumbnails={movie.thumb_url}
+                icons={defaultLayoutIcons}
+              />
+            </MediaPlayer>
 
             {episodes.length > 1 && (
               <div className="mt-4">
