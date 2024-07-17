@@ -11,7 +11,6 @@ import {
 import { useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import VideoPlayer from "../../Components/VideoPlayer";
 import LoadingGif from "../../assets/loading.gif";
 
 import "@vidstack/react/player/styles/default/theme.css";
@@ -32,7 +31,6 @@ function Movie() {
   const [error, setError] = useState(null);
   const [episodes, setEpisodes] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
-  const [videoPlayerKey, setVideoPlayerKey] = useState(0);
   const [movieLoaded, setMovieLoaded] = useState(false);
 
   useEffect(() => {
@@ -94,10 +92,6 @@ function Movie() {
         });
     }
   }, [movieLoaded, movie]);
-
-  useEffect(() => {
-    setVideoPlayerKey((prevKey) => prevKey + 1);
-  }, [episodes]);
 
   const handleEpisodeClick = (episode) => {
     setSelectedEpisode(episode);
