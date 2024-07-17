@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfree_movie=self.webpackChunkfree_movie||[]).push([[409],{409:(e,s,t)=>{t.r(s),t.d(s,{AudioProvider:()=>u});var i=t(607),r=t(108);t(43);class u extends r.BS{constructor(e,s){super(e,s),this.$$PROVIDER_TYPE="AUDIO",(0,i.scoped)((()=>{this.airPlay=new r.zn(this.media,s)}),this.scope)}get type(){return"audio"}setup(){super.setup(),"audio"===this.type&&this.b.delegate.c("provider-setup",this)}get audio(){return this.a}}}}]);
+//# sourceMappingURL=409.e6a7a224.chunk.js.map
