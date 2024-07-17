@@ -8,6 +8,7 @@ function VideoPlayer({ selectedEpisode }) {
 
   useEffect(() => {
     const firstEpisode = selectedEpisode.link_m3u8;
+
     if (!videoRef.current) return;
 
     if (playerRef.current) {
@@ -22,6 +23,8 @@ function VideoPlayer({ selectedEpisode }) {
       autoplay: false,
       controls: true,
       fluid: true,
+      responsive: true,
+      playbackRates: [0.5, 1, 1.25, 1.5, 2],
       controlBar: {
         skipButtons: {
           forward: 10, // Tua tới 10 giây

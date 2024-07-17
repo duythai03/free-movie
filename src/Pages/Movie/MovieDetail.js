@@ -185,7 +185,7 @@ function Movie() {
                   {episodes.map((episode, index) => (
                     <li
                       key={index}
-                      className={`cursor-pointer p-4 text-center bg-medium-blue ${
+                      className={`cursor-pointer p-4 flex justify-center items-center bg-medium-blue ${
                         episode === selectedEpisode
                           ? "text-blue-500"
                           : "text-gray-700"
