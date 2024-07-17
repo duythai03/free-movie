@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/free-movie/static/css/main.d993d98d.css",
-    "main.js": "/free-movie/static/js/main.b759ee1e.js",
+    "main.js": "/free-movie/static/js/main.c51544e7.js",
     "static/js/453.cee21a7d.chunk.js": "/free-movie/static/js/453.cee21a7d.chunk.js",
     "static/media/loading.gif": "/free-movie/static/media/loading.d297649bc9bc974858a7.gif",
     "static/media/FreeMovieLogo.png": "/free-movie/static/media/FreeMovieLogo.7a7ee0d5cbb264f89d65.png",
     "index.html": "/free-movie/index.html",
     "main.d993d98d.css.map": "/free-movie/static/css/main.d993d98d.css.map",
-    "main.b759ee1e.js.map": "/free-movie/static/js/main.b759ee1e.js.map",
+    "main.c51544e7.js.map": "/free-movie/static/js/main.c51544e7.js.map",
     "453.cee21a7d.chunk.js.map": "/free-movie/static/js/453.cee21a7d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d993d98d.css",
-    "static/js/main.b759ee1e.js"
+    "static/js/main.c51544e7.js"
   ]
 }
