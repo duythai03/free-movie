@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/free-movie/static/css/main.42dff63e.css",
-    "main.js": "/free-movie/static/js/main.1e806579.js",
+    "main.js": "/free-movie/static/js/main.c6959667.js",
     "static/js/813.aed1b6dc.chunk.js": "/free-movie/static/js/813.aed1b6dc.chunk.js",
     "static/js/409.e6a7a224.chunk.js": "/free-movie/static/js/409.e6a7a224.chunk.js",
     "static/js/884.5420f37f.chunk.js": "/free-movie/static/js/884.5420f37f.chunk.js",
@@ -19,7 +19,7 @@
     "static/media/FreeMovieLogo.png": "/free-movie/static/media/FreeMovieLogo.7a7ee0d5cbb264f89d65.png",
     "index.html": "/free-movie/index.html",
     "main.42dff63e.css.map": "/free-movie/static/css/main.42dff63e.css.map",
-    "main.1e806579.js.map": "/free-movie/static/js/main.1e806579.js.map",
+    "main.c6959667.js.map": "/free-movie/static/js/main.c6959667.js.map",
     "813.aed1b6dc.chunk.js.map": "/free-movie/static/js/813.aed1b6dc.chunk.js.map",
     "409.e6a7a224.chunk.js.map": "/free-movie/static/js/409.e6a7a224.chunk.js.map",
     "884.5420f37f.chunk.js.map": "/free-movie/static/js/884.5420f37f.chunk.js.map",
@@ -36,6 +36,6 @@
   },
   "entrypoints": [
     "static/css/main.42dff63e.css",
-    "static/js/main.1e806579.js"
+    "static/js/main.c6959667.js"
   ]
 }
