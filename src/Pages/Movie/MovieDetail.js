@@ -226,7 +226,7 @@ function Movie() {
                     className="w-[150px] md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
                     key={movie._id}
                   >
-                    <Link to={`/free-movie/movie/${movie.slug}`}>
+                    <Link to={`/movie/${movie.slug}`}>
                       <img
                         src={`https://img.phimapi.com/${movie.poster_url}`}
                         alt={movie.name}

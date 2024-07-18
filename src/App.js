@@ -11,14 +11,11 @@ function App() {
     <div className="">
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path="/free-movie" element={<Home />} />
-          <Route path="/free-movie/movie/:slug" element={<MovieDetail />} />
-          <Route path="/free-movie/recent-movies" element={<RecentMovies />} />
-          <Route path="/free-movie/type/:type_list" element={<OtherMovies />} />
-          <Route
-            path="/free-movie/search/:search_query"
-            element={<SearchResults />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/movie/:slug" element={<MovieDetail />} />
+          <Route path="/recent-movies" element={<RecentMovies />} />
+          <Route path="/type/:type_list" element={<OtherMovies />} />
+          <Route path="/search/:search_query" element={<SearchResults />} />
         </Routes>
       </Router>
     </div>

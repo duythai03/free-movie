@@ -14,14 +14,14 @@ function Header() {
   return (
     <div className="h-[80px] px-6 flex justify-between items-center bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue md:h-[100px] md:px-[70px] ">
       <ul className="flex flex-row text-xl items-center">
-        <Link to="/free-movie">
+        <Link to="/">
           <img
             src={Logo}
             alt="FreeMovie"
             className="h-[45px] md:h-[50px] w-auto mr-9"
           />
         </Link>
-        <Link to="/free-movie/type/tv-shows">
+        <Link to="/type/tv-shows">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("tvshows")}
@@ -29,7 +29,7 @@ function Header() {
             TV SHOW
           </li>
         </Link>
-        <Link to="/free-movie/type/phim-le">
+        <Link to="/type/phim-le">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("movies")}
@@ -37,7 +37,7 @@ function Header() {
             PHIM ĐIỆN ẢNH
           </li>
         </Link>
-        <Link to="/free-movie/type/phim-bo">
+        <Link to="/type/phim-bo">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("series")}
@@ -45,7 +45,7 @@ function Header() {
             PHIM BỘ
           </li>
         </Link>
-        <Link to="/free-movie/type/hoat-hinh">
+        <Link to="/type/hoat-hinh">
           <li
             className="cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("cartoons")}
