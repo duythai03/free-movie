@@ -28,14 +28,14 @@ function SearchInput() {
       <input
         type="text"
         placeholder="Tìm kiếm phim..."
-        className="w-40 p-1 pl-3 rounded-full text-black border border-gray-300 focus:outline-none md:w-80 md:p-2 md:pl-6"
+        className="w-40 p-1 pl-3 rounded-full text-black border border-gray-300 focus:outline-none xl:w-80 xl:p-2 xl:pl-6 sm:w-[280px] lg:w-[270px] md:w-40"
         value={keyword}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
 
       <i
-        className="absolute right-[2px] text-xl text-gray-500 cursor-pointer px-[12px] py-[10px] hidden md:block"
+        className="absolute right-[2px] text-sm text-gray-500 cursor-pointer px-[12px] py-[10px] hidden sm:block sm:text-lg sm:px-[10px] sm:py-[8px]"
         onClick={handleSearch}
       >
         <FaMagnifyingGlass />

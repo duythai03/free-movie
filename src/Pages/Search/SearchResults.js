@@ -45,13 +45,13 @@ function SearchResults() {
       )}
       {!loading && !error && results.length > 0 && (
         <div className="px-2 md:mb-16 md:px-[70px]">
-          <div className="text-xl font-semibold mt-4 ml-3 md:ml-[60px]">
+          <div className="text-xl font-semibold mt-4 ml-3 xl:ml-[60px]">
             Kết quả tìm kiếm "{search_query}"
           </div>
-          <ul className="grid grid-cols-2 gap-y-9 md:gap-y-16 md:grid-cols-6 justify-items-center mt-8 md:ml-0">
+          <ul className="grid grid-cols-2 gap-y-9 xl:gap-y-16 xl:grid-cols-6 justify-items-center mt-8 xl:ml-0 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3">
             {results.map((movie) => (
               <li
-                className="w-[150px] md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+                className="w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
                 key={movie._id}
               >
                 <Link to={`/movie/${movie.slug}`}>
@@ -60,7 +60,7 @@ function SearchResults() {
                     alt={movie.name}
                     className="w-[150px] h-[210px] object-cover"
                   />
-                  <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 md:mb-0">
+                  <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
                     {movie.name}
                   </p>
                 </Link>

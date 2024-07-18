@@ -198,12 +198,12 @@ function Movie() {
                     episodes.length > 30
                       ? "h-96 overflow-y-scroll scrollbar-hide"
                       : ""
-                  } grid grid-cols-4 gap-3 md:grid-cols-10`}
+                  } grid grid-cols-4 gap-3 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4`}
                 >
                   {episodes.map((episode, index) => (
                     <li
                       key={index}
-                      className={`cursor-pointer p-4 flex justify-center items-center bg-medium-blue ${
+                      className={`cursor-pointer p-4 flex justify-center items-center text-center bg-medium-blue ${
                         episode === selectedEpisode
                           ? "text-blue-500"
                           : "text-gray-700"
@@ -220,10 +220,10 @@ function Movie() {
             {/* Gợi ý phim */}
             <div className="mt-12">
               <div className="text-xl font-semibold">Có thể bạn sẽ thích</div>
-              <ul className="grid grid-cols-2 gap-y-9 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
+              <ul className="grid grid-cols-2 gap-y-9 justify-items-center xl:flex xl:justify-around mt-8 xl:ml-0 sm:grid-cols-3">
                 {movies.map((movie) => (
                   <li
-                    className="w-[150px] md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+                    className="w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
                     key={movie._id}
                   >
                     <Link to={`/movie/${movie.slug}`}>
@@ -232,7 +232,7 @@ function Movie() {
                         alt={movie.name}
                         className="w-[150px] h-[210px] object-cover"
                       />
-                      <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 md:mb-0">
+                      <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
                         {movie.name}
                       </p>
                     </Link>

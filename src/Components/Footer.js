@@ -36,32 +36,32 @@ function Footer() {
         </div>
         <div className="text-center md:text-start">
           <h2 className="font-bold text-lg">Thông tin liên hệ</h2>
-          <div className="mt-4 space-x-4">
+          <div className="mt-4 space-x-4 flex flex-row md:flex-col md:space-x-0 lg:flex-row lg:space-x-4">
             <a
               href="https://www.facebook.com/"
               target="blank"
-              className="hover:underline"
+              className="hover:underline block"
             >
               Facebook
             </a>
             <a
               href="https://www.instagram.com/"
               target="blank"
-              className="hover:underline"
+              className="hover:underline block"
             >
               Instgram
             </a>
             <a
               href="https://github.com/duythai03"
               target="blank"
-              className="hover:underline"
+              className="hover:underline block"
             >
               Github
             </a>
             <a
               href="https://discord.com/"
               target="blank"
-              className="hover:underline"
+              className="hover:underline block"
             >
               Discord
             </a>

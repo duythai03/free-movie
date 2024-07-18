@@ -13,7 +13,7 @@ function Header() {
 
   return (
     <div className="h-[80px] px-6 flex justify-between items-center bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue md:h-[100px] md:px-[70px] ">
-      <ul className="flex flex-row text-xl items-center">
+      <ul className="flex flex-row items-center xl:text-xl lg:text-lg md:text-sm">
         <Link to="/">
           <img
             src={Logo}

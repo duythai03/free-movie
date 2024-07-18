@@ -33,7 +33,7 @@ function MoviesList() {
     <div id="movies" className="md:px-[70px] mt-8 h-auto">
       <Link to={`/type/${type}`}>
         <div className="flex items-center opacity-[0.9] hover:opacity-100">
-          <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">
+          <h2 className="ml-6 mr-3 text-xl font-semibold xl:ml-2">
             Phim điện ảnh
           </h2>
 
@@ -42,10 +42,13 @@ function MoviesList() {
           </i>
         </div>
       </Link>
-      <ul className="grid grid-cols-2 gap-y-10 mb-12 justify-items-center md:flex md:justify-around mt-8 md:ml-0">
+      <ul
+        className="grid grid-cols-2 gap-y-10 mb-12 justify-items-center xl:flex xl:justify-around mt-8 xl:ml-0
+      md:grid-cols-4 sm:grid-cols-3"
+      >
         {movies.map((movie) => (
           <li
-            className="w-[150px] h md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+            className="w-[150px] h xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
             key={movie._id}
           >
             <Link to={`/movie/${movie.slug}`}>
@@ -54,14 +57,14 @@ function MoviesList() {
                 alt={movie.name}
                 className="w-[150px] h-[210px] object-cover"
               />
-              <div className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 md:mb-0">
+              <div className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
                 {movie.name}
               </div>
             </Link>
           </li>
         ))}
       </ul>
-      <hr className="md:mt-12 bg-gray-400 opacity-[0.2]" />
+      <hr className="xl:mt-12 bg-gray-400 opacity-[0.2]" />
     </div>
   );
 }
