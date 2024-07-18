@@ -133,7 +133,7 @@ function Slider() {
                 <div className="mr-4">New</div>
               </div>
               <div className="mt-6 w-[200px] h-[50px] bg-gray-200 hover:bg-white border rounded-3xl flex justify-center items-center text-dark-blue text-xl font-semibold cursor-pointer">
-                <Link to={`/movie/${movie.slug}`}>Xem ngay</Link>
+                <Link to={`/free-movie/movie/${movie.slug}`}>Xem ngay</Link>
               </div>
             </div>
           </li>

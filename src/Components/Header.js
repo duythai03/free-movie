@@ -21,7 +21,7 @@ function Header() {
             className="h-[45px] md:h-[50px] w-auto mr-9"
           />
         </Link>
-        <Link to="/type/tv-shows">
+        <Link to="/free-movie/type/tv-shows">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("tvshows")}
@@ -29,7 +29,7 @@ function Header() {
             TV SHOW
           </li>
         </Link>
-        <Link to="/type/phim-le">
+        <Link to="/free-movie/type/phim-le">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("movies")}
@@ -37,7 +37,7 @@ function Header() {
             PHIM ĐIỆN ẢNH
           </li>
         </Link>
-        <Link to="/type/phim-bo">
+        <Link to="/free-movie/type/phim-bo">
           <li
             className="mr-9 cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("series")}
@@ -45,7 +45,7 @@ function Header() {
             PHIM BỘ
           </li>
         </Link>
-        <Link to="/type/hoat-hinh">
+        <Link to="/free-movie/type/hoat-hinh">
           <li
             className="cursor-pointer hidden md:block font-semibold"
             onClick={() => scrollToSection("cartoons")}

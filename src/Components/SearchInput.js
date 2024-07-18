@@ -16,7 +16,7 @@ function SearchInput() {
       return;
     }
     const normalizedKeyword = normalize(keyword);
-    navigate(`/search/${encodeURIComponent(normalizedKeyword)}`);
+    navigate(`/free-movie/search/${encodeURIComponent(normalizedKeyword)}`);
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {

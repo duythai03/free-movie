@@ -29,7 +29,7 @@ function SeriesList() {
   console.log(movies);
   return (
     <div id="series" className="md:px-[70px] mt-8 h-auto">
-      <Link to={`/type/phim-bo`}>
+      <Link to={`/free-movie/type/phim-bo`}>
         <div className="flex items-center opacity-[0.9] hover:opacity-100">
           <h2 className="ml-6 mr-3 text-xl font-semibold md:ml-2">Phim bộ</h2>
 
@@ -44,7 +44,7 @@ function SeriesList() {
             className="w-[150px] h md:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
             key={movie._id}
           >
-            <Link to={`/movie/${movie.slug}`}>
+            <Link to={`/free-movie/movie/${movie.slug}`}>
               <img
                 src={`https://img.phimapi.com/${movie.poster_url}`}
                 alt={movie.name}
