@@ -9,7 +9,7 @@ import SearchResults from "./Pages/Search/SearchResults.js";
 function App() {
   return (
     <div className="">
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/free-movie" element={<Home />} />
           <Route path="/free-movie/movie/:slug" element={<MovieDetail />} />
