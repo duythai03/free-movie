@@ -267,13 +267,15 @@ function Movie() {
               </ul>
             </div>
             <div className="mt-12 text-xl font-semibold">Bình luận phim</div>
-            <div
-              className="fb-comments bg-white mt-4"
-              data-href={`https://duythai03.github.io/free-movie/#/movie/${movie.slug}`}
-              data-width="100%"
-              data-mobile="autp"
-              data-numposts="5"
-            ></div>
+            <div className="bg-white mt-4 w-full">
+              <div
+                className="fb-comments"
+                data-href={`https://duythai03.github.io/free-movie/#/movie/${movie.slug}`}
+                data-width="100%"
+                data-mobile="autp"
+                data-numposts="5"
+              ></div>
+            </div>
           </div>
         </div>
       )}
