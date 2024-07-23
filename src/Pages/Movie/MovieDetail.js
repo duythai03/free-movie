@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import {
   FaStar,
@@ -8,16 +8,13 @@ import {
   FaSquareShareNodes,
   FaSquareReddit,
 } from "react-icons/fa6";
-import { useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
-
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
-
-import { MediaPlayer, MediaProvider, Poster, Track } from "@vidstack/react";
+import { MediaPlayer, MediaProvider, Poster } from "@vidstack/react";
 import {
   DefaultVideoLayout,
   defaultLayoutIcons,
@@ -39,14 +36,12 @@ function Movie() {
       .then((res) => {
         if (res.data.status) {
           setMovie(res.data.movie);
-
           const allServerData = res.data.episodes
             .map((ep) => ep.server_data)
             .flat();
           setEpisodes(allServerData);
           setSelectedEpisode(allServerData[0]);
           setMovieLoaded(true);
-
           console.log(res.data.movie);
           console.log(allServerData);
         } else {
@@ -74,7 +69,6 @@ function Movie() {
       } else {
         type = "phim-moi-cap-nhat";
       }
-
       axios
         .get(`https://phimapi.com/v1/api/danh-sach/${type}`)
         .then((res) => {
@@ -97,8 +91,41 @@ function Movie() {
     setSelectedEpisode(episode);
   };
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0&appId=367660879695093";
+    script.async = true;
+    script.defer = true;
+    script.crossOrigin = "anonymous";
+    script.nonce = "Iv8Zus5H";
+    script.onload = () => {
+      if (window.FB) {
+        window.FB.init({
+          appId: "367660879695093",
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v20.0",
+        });
+        window.FB.XFBML.parse();
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.FB) {
+      window.FB.XFBML.parse();
+    }
+  }, [movie]);
+
   return (
     <div className="min-h-screen flex flex-col">
+      <div id="fb-root"></div>
       <Header />
       {loading && (
         <div className="flex-grow flex justify-center items-center">
@@ -217,7 +244,6 @@ function Movie() {
               </div>
             )}
 
-            {/* Gợi ý phim */}
             <div className="mt-12">
               <div className="text-xl font-semibold">Có thể bạn sẽ thích</div>
               <ul className="grid grid-cols-2 gap-y-9 justify-items-center xl:flex xl:justify-around mt-8 xl:ml-0 sm:grid-cols-3">
@@ -240,6 +266,14 @@ function Movie() {
                 ))}
               </ul>
             </div>
+            <div className="mt-12 text-xl font-semibold">Bình luận phim</div>
+            <div
+              className="fb-comments bg-white mt-4"
+              data-href={`https://duythai03.github.io/free-movie/#/movie/${movie.slug}`}
+              data-width="100%"
+              data-mobile="autp"
+              data-numposts="5"
+            ></div>
           </div>
         </div>
       )}
