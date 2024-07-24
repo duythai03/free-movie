@@ -12,7 +12,7 @@ import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
 
-function SecretDetail() {
+function FilmDetial() {
   const { slug } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -160,4 +160,4 @@ function SecretDetail() {
   );
 }
 
-export default SecretDetail;
+export default FilmDetial;

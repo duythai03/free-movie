@@ -6,7 +6,7 @@ import Pagination from "../../Components/Pagination";
 import axios from "axios";
 import LoadingGif from "../../assets/loading.gif";
 
-function OtherMovies() {
+function Film() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -80,6 +80,7 @@ function OtherMovies() {
                     src={movie.thumb_url}
                     alt={movie.name}
                     className="w-[150px] h-[210px] object-cover"
+                    loading="lazy"
                   />
                   <p className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
                     {movie.name}
@@ -100,4 +101,4 @@ function OtherMovies() {
   );
 }
 
-export default OtherMovies;
+export default Film;

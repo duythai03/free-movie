@@ -10,7 +10,7 @@ function Footer() {
           <p className="mt-4">
             Trang web cung cấp thông tin về các bộ phim mới nhất,{" "}
             <span>
-              <Link to="/type/secret" className="cursor-default">
+              <Link to="/type/film" className="cursor-default">
                 phim hot
               </Link>
             </span>{" "}
