@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -7,8 +8,13 @@ function Footer() {
         <div className="md:pl-12 text-center md:text-start">
           <h2 className="font-bold text-lg">FREEMOVIE</h2>
           <p className="mt-4">
-            Trang web cung cấp thông tin về các bộ phim mới nhất, phim hot và
-            nhiều hơn nữa. Made by Logan :3
+            Trang web cung cấp thông tin về các bộ phim mới nhất,{" "}
+            <span>
+              <Link to="/type/secret" className="cursor-default">
+                phim hot
+              </Link>
+            </span>{" "}
+            và nhiều hơn nữa. Made by Logan :3
           </p>
         </div>
         <div>
