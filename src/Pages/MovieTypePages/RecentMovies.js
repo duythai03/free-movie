@@ -17,7 +17,7 @@ function RecentMovies() {
   useEffect(() => {
     axios
       .get(
-        `https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=${currentPage}`
+        `https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=${currentPage}&limit=18`
       )
       .then((res) => {
         if (res.data.status) {

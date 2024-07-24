@@ -23,7 +23,7 @@ function OtherMovies() {
   useEffect(() => {
     axios
       .get(
-        `https://phimapi.com/v1/api/danh-sach/${type_list}?page=${currentPage}`
+        `https://phimapi.com/v1/api/danh-sach/${type_list}?page=${currentPage}&limit=18`
       )
       .then((res) => {
         if (res.data.status) {
