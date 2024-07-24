@@ -34,7 +34,7 @@ function Film() {
       .then((res) => {
         if (res.data.status) {
           setMovies(res.data.movies);
-          setTotalPages(res.data.page.total);
+          setTotalPages(res.data.page.last_page);
         } else {
           setError("Cập nhật thất bại");
         }
