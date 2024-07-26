@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 function SearchResults() {
   const { search_query } = useParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     axios
       .get(`https://phimapi.com/v1/api/tim-kiem?keyword=${search_query}`)
@@ -41,11 +43,21 @@ function SearchResults() {
       )}
       {error && <p>{error}</p>}
       {!loading && !error && results.length === 0 && (
-        <p className="ml-4">Không tìm thấy kết quả</p>
+        <p
+          className={`text-xl font-semibold mt-4 ml-3 xl:ml-[40px]
+          ${theme === "tolight" ? "" : "text-black-text"}
+          `}
+        >
+          Không tìm thấy kết quả
+        </p>
       )}
       {!loading && !error && results.length > 0 && (
         <div className="px-2 md:mb-16 md:px-[70px]">
-          <div className="text-xl font-semibold mt-4 ml-3 xl:ml-[60px]">
+          <div
+            className={`text-xl font-semibold mt-4 ml-3 xl:ml-[40px]
+          ${theme === "tolight" ? "" : "text-black-text"}
+          `}
+          >
             Kết quả tìm kiếm "{search_query}"
           </div>
           <ul className="grid grid-cols-2 gap-y-9 xl:gap-y-16 xl:grid-cols-6 justify-items-center mt-8 xl:ml-0 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3">
