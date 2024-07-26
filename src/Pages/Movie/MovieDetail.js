@@ -11,7 +11,6 @@ import {
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
-import HorizonLine from "../../Components/HorizonLine";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
 import "@vidstack/react/player/styles/default/layouts/video.css";
@@ -164,7 +163,7 @@ function Movie() {
                 <div className=" mt-1">Thời lượng: {movie.time}</div>
                 <div
                   className={`w-full h-[76px] my-4 bg-medium-blue flex justify-around items-center 
-                ${theme === "tolight" ? "" : "bg-[#f0f0f0]"}
+                ${theme === "tolight" ? "" : "bg-custom-gray"}
                 `}
                 >
                   <div className="flex text-2xl">

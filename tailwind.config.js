@@ -22,6 +22,9 @@ module.exports = {
         11: "11",
         12: "12",
       },
+      backgroundColor: {
+        "custom-gray": "#f0f0f0 !important",
+      },
     },
   },
   plugins: [
