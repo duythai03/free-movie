@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import { ThemeContext } from "../Context/ThemeContext";
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
+  const { theme } = useContext(ThemeContext);
   const handleClick = (page) => {
     return () => {
       if (page > 0 && page <= totalPages) {
@@ -190,7 +192,9 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={handleClick(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-4 opacity-70 hover:opacity-100"
+        className={`p-4 opacity-70 hover:opacity-100
+        ${theme === "tolight" ? "" : "text-black-text"}
+        `}
       >
         <FaAngleLeft />
       </button>
@@ -198,7 +202,9 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={handleClick(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-4 opacity-70 hover:opacity-100"
+        className={`p-4 opacity-70 hover:opacity-100
+        ${theme === "tolight" ? "" : "text-black-text"}
+        `}
       >
         <FaAngleRight />
       </button>

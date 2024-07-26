@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaAnglesRight } from "react-icons/fa6";
+import HorizonLine from "../../Components/HorizonLine";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 function CartoonList() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     axios
@@ -27,11 +30,16 @@ function CartoonList() {
       });
   }, []);
 
-  console.log(movies);
   return (
     <div id="cartoons" className="md:px-[70px] mt-8 h-auto">
       <Link to={`/type/hoat-hinh`}>
-        <div className="flex items-center opacity-[0.9] hover:opacity-100">
+        <div
+          className={`flex items-center opacity-[0.9] hover:opacity-100 ${
+            theme === "tolight"
+              ? ""
+              : "text-teal-900 opacity-100 hover:opacity-80"
+          }`}
+        >
           <h2 className="ml-6 mr-3 text-xl font-semibold xl:ml-2">
             Phim hoạt hình
           </h2>
@@ -47,7 +55,9 @@ function CartoonList() {
       >
         {movies.map((movie) => (
           <li
-            className="w-[150px] h xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+            className={`w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110 
+                        ${theme === "tolight" ? "" : "shadow-bigFull"}
+                      `}
             key={movie._id}
           >
             <Link to={`/movie/${movie.slug}`}>
@@ -56,14 +66,14 @@ function CartoonList() {
                 alt={movie.name}
                 className="w-[150px] h-[210px] object-cover"
               />
-              <div className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
+              <div className="absolute bottom-0 leading-[42px]  w-full h-[42px] bg-black text-white bg-opacity-70 text-sm font-semibold mt-2 text-center line-clamp-1 xl:mb-0">
                 {movie.name}
               </div>
             </Link>
           </li>
         ))}
       </ul>
-      <hr className="xl:mt-12 bg-gray-400 opacity-[0.2]" />
+      <HorizonLine />
     </div>
   );
 }

@@ -35,7 +35,7 @@ function SearchInput() {
       />
 
       <i
-        className="absolute right-[2px] text-sm text-gray-500 cursor-pointer px-[12px] py-[10px] hidden sm:block sm:text-lg sm:px-[10px] sm:py-[8px]"
+        className="absolute right-[2px] text-sm text-gray-500 cursor-pointer px-[12px] py-[10px] hidden sm:block sm:text-lg sm:px-[10px] sm:py-[10px]"
         onClick={handleSearch}
       >
         <FaMagnifyingGlass />

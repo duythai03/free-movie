@@ -92,7 +92,7 @@ function Slider() {
   }, [totalItem]);
 
   return (
-    <div className="w-full overflow-hidden relative">
+    <div className="w-full overflow-hidden relative text-white">
       <i
         className="absolute top-[220px] md:top-[260px] left-[16px] md:left-[24px] text-5xl z-10 opacity-40 hover:opacity-100 cursor-pointer"
         ref={leftBtnRef}

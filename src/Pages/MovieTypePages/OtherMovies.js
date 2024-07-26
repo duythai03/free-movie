@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
 import LoadingGif from "../../assets/loading.gif";
+import { ThemeContext } from "../../Context/ThemeContext";
 
 function OtherMovies() {
   const [movies, setMovies] = useState([]);
@@ -14,6 +15,7 @@ function OtherMovies() {
   const [error, setError] = useState(null);
   const { type_list } = useParams();
   const moviesContainerRef = useRef(null);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     // Reset currentPage to 1 whenever type_list changes
@@ -85,7 +87,9 @@ function OtherMovies() {
       {!loading && !error && movies && (
         <div className="px-2 md:px-[70px]">
           <div
-            className="text-xl font-semibold mt-4 ml-3 xl:ml-[40px]"
+            className={`text-xl font-semibold mt-4 ml-3 xl:ml-[40px]
+          ${theme === "tolight" ? "" : "text-black-text"}
+          `}
             ref={moviesContainerRef}
           >
             Danh sách {type} - Trang {currentPage}
@@ -93,7 +97,9 @@ function OtherMovies() {
           <ul className="grid grid-cols-2 gap-y-9 xl:gap-y-16 xl:grid-cols-6 justify-items-center mt-8 xl:ml-0 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3">
             {movies.map((movie) => (
               <li
-                className="w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+                className={`w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110 
+                        ${theme === "tolight" ? "" : "shadow-bigFull"}
+                      `}
                 key={movie._id}
               >
                 <Link to={`/movie/${movie.slug}`}>
