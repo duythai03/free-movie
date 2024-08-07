@@ -4,6 +4,7 @@ import ThemeToggle from "./ThemeToggle";
 import { Link } from "react-router-dom";
 import Logo from "../assets/FreeMovieLogo.png";
 import { ThemeContext } from "../Context/ThemeContext";
+import Menu from "./Menu";
 
 function Header() {
   const scrollToSection = (id) => {
@@ -66,6 +67,7 @@ function Header() {
       </ul>
       <SearchInput />
       <ThemeToggle />
+      <Menu />
     </div>
   );
 }

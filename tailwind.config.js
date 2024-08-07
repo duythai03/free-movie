@@ -25,10 +25,14 @@ module.exports = {
       backgroundColor: {
         "custom-gray": "#f0f0f0 !important",
       },
+      backgroundImage: {
+        "login-bg": "url('/src/assets/loginbg.png')",
+      },
     },
   },
   plugins: [
     require("@tailwindcss/line-clamp"),
     require("tailwind-scrollbar-hide"),
+    require("daisyui"),
   ],
 };
