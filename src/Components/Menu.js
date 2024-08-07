@@ -26,7 +26,7 @@ function Menu() {
                 //   setIsLogin(true);
                 //   setMenuOpen(false);
                 // }}
-                className="block p-2 text-black hover:bg-gray-100"
+                className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200"
               >
                 Đăng nhập/Đăng ký
               </div>
