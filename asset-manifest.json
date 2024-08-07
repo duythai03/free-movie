@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/free-movie/static/css/main.8d32c8ca.css",
-    "main.js": "/free-movie/static/js/main.4483392e.js",
+    "main.css": "/free-movie/static/css/main.5933c312.css",
+    "main.js": "/free-movie/static/js/main.a6d3dff6.js",
     "static/js/813.aed1b6dc.chunk.js": "/free-movie/static/js/813.aed1b6dc.chunk.js",
     "static/js/409.e6a7a224.chunk.js": "/free-movie/static/js/409.e6a7a224.chunk.js",
     "static/js/884.5420f37f.chunk.js": "/free-movie/static/js/884.5420f37f.chunk.js",
@@ -15,13 +15,15 @@
     "static/js/963.ab8d876d.chunk.js": "/free-movie/static/js/963.ab8d876d.chunk.js",
     "static/js/99.2103ecf8.chunk.js": "/free-movie/static/js/99.2103ecf8.chunk.js",
     "static/js/550.70a87e28.chunk.js": "/free-movie/static/js/550.70a87e28.chunk.js",
+    "static/media/loginbg.png": "/free-movie/static/media/loginbg.92b9f37e32141e2d718b.png",
+    "static/media/login-img.jpg": "/free-movie/static/media/login-img.050ae4ff3d50dc612fa1.jpg",
     "static/media/loading.gif": "/free-movie/static/media/loading.d297649bc9bc974858a7.gif",
     "static/media/FreeMovieLogo.png": "/free-movie/static/media/FreeMovieLogo.7a7ee0d5cbb264f89d65.png",
     "static/media/brightness.png": "/free-movie/static/media/brightness.2420d5a2b4230e46b39b.png",
     "static/media/moon.png": "/free-movie/static/media/moon.ba6fbe4ddaec8ad72bf0.png",
     "index.html": "/free-movie/index.html",
-    "main.8d32c8ca.css.map": "/free-movie/static/css/main.8d32c8ca.css.map",
-    "main.4483392e.js.map": "/free-movie/static/js/main.4483392e.js.map",
+    "main.5933c312.css.map": "/free-movie/static/css/main.5933c312.css.map",
+    "main.a6d3dff6.js.map": "/free-movie/static/js/main.a6d3dff6.js.map",
     "813.aed1b6dc.chunk.js.map": "/free-movie/static/js/813.aed1b6dc.chunk.js.map",
     "409.e6a7a224.chunk.js.map": "/free-movie/static/js/409.e6a7a224.chunk.js.map",
     "884.5420f37f.chunk.js.map": "/free-movie/static/js/884.5420f37f.chunk.js.map",
@@ -37,7 +39,7 @@
     "550.70a87e28.chunk.js.map": "/free-movie/static/js/550.70a87e28.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8d32c8ca.css",
-    "static/js/main.4483392e.js"
+    "static/css/main.5933c312.css",
+    "static/js/main.a6d3dff6.js"
   ]
 }
