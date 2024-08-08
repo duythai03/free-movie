@@ -9,6 +9,7 @@ module.exports = {
         "light-text": "#92989F",
         "black-text": "#333333",
         "light-bg": "#f5f5f5",
+        mainBlue: "#3180ff",
       },
       boxShadow: {
         bottom: "0 3px 6px -2px gray",

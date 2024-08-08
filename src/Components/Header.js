@@ -18,7 +18,7 @@ function Header() {
 
   return (
     <div
-      className={`h-[80px] px-3 flex justify-between items-center  md:h-[90px] md:px-[70px] ${
+      className={`h-[80px] px-3 flex justify-between items-center  md:h-[90px] xl:px-[70px] ${
         theme === "tolight"
           ? " bg-gradient-to-r from-medium-blue via-light-blue to-medium-blue"
           : "bg-light-bg text-teal-900 shadow-bottom"

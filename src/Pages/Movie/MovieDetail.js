@@ -19,6 +19,13 @@ import {
   DefaultVideoLayout,
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
+import { useSelector, useDispatch } from "react-redux";
+import * as FavMovieService from "../../service/FavMovieService";
+import * as MovieHistoryService from "../../service/MovieHistoryService";
+import { addMovie } from "../../redux/slices/movieHistorySlice";
+import { addFavMovie } from "../../redux/slices/favMovieSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Movie() {
   const { slug } = useParams();
@@ -30,31 +37,72 @@ function Movie() {
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [movieLoaded, setMovieLoaded] = useState(false);
   const { theme } = useContext(ThemeContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    axios
-      .get(`https://phimapi.com/phim/${slug}`)
-      .then((res) => {
+    const fetchMovieData = async () => {
+      try {
+        const res = await axios.get(`https://phimapi.com/phim/${slug}`);
         if (res.data.status) {
-          setMovie(res.data.movie);
+          const fetchedMovie = res.data.movie;
+          setMovie(fetchedMovie);
           const allServerData = res.data.episodes
             .map((ep) => ep.server_data)
             .flat();
           setEpisodes(allServerData);
           setSelectedEpisode(allServerData[0]);
           setMovieLoaded(true);
-          console.log(res.data.movie);
-          console.log(allServerData);
+
+          // Thêm phim vào lịch sử ngay khi dữ liệu được tải
+          if (user?.id) {
+            const historyData = {
+              name: fetchedMovie.name,
+              slug: fetchedMovie.slug,
+              poster_url: fetchedMovie.poster_url,
+              thumb_url: fetchedMovie.thumb_url,
+              user_id: user.id,
+            };
+            await MovieHistoryService.addMovie(user.access_token, historyData);
+            dispatch(addMovie(fetchedMovie));
+          }
         } else {
           setError("Phim sẽ được cập nhập sớm nhất");
         }
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError("Phim sẽ được cập nhập sớm nhất");
+      } finally {
         setLoading(false);
-      });
-  }, [slug]);
+      }
+    };
+    fetchMovieData();
+  }, [slug, user.id, user.access_token, dispatch]);
+
+  const handleAddFavMovie = async () => {
+    if (user?.id) {
+      try {
+        const movieData = {
+          name: movie.name,
+          slug: movie.slug,
+          poster_url: movie.poster_url,
+          thumb_url: movie.thumb_url,
+          user_id: user.id,
+        };
+        const res = await FavMovieService.addMovie(
+          user.access_token,
+          movieData
+        );
+        dispatch(addFavMovie(res));
+        toast.success("Đã thêm vào danh sách yêu thích!");
+      } catch (error) {
+        toast.error("Đã xảy ra lỗi khi thêm phim vào danh sách yêu thích!");
+      }
+    } else {
+      setIsModalOpen(true);
+    }
+  };
 
   useEffect(() => {
     if (movieLoaded) {
@@ -124,8 +172,13 @@ function Movie() {
     }
   }, [movie]);
 
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      <ToastContainer />
       <div id="fb-root"></div>
       <Header />
       {loading && (
@@ -166,15 +219,12 @@ function Movie() {
                 ${theme === "tolight" ? "" : "bg-custom-gray"}
                 `}
                 >
-                  <div className="flex text-2xl">
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                    <FaStar />
-                  </div>
-                  <div className="text-xl">../10</div>
-                  <div className="text-xl">(no review)</div>
+                  <button
+                    className="text-xl font-semibold"
+                    onClick={handleAddFavMovie}
+                  >
+                    Thêm vào yêu thích
+                  </button>
                 </div>
                 <div className="line-clamp-12  text-sm text-justify">
                   {movie.content}
@@ -319,6 +369,29 @@ function Movie() {
         </div>
       )}
       <Footer />
+      {isModalOpen && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-4 rounded-lg text-gray-700">
+            <p className="text-xl font-semibold">
+              Bạn chưa đăng nhập, vui lòng đăng nhập để thêm phim yêu thích
+            </p>
+            <div className="flex justify-end mt-4">
+              <button
+                className="text-base rounded-lg border border-gray-500 p-2 font-semibold"
+                onClick={handleModal}
+              >
+                Hủy
+              </button>
+              <Link
+                to="/login"
+                className="text-base rounded-lg bg-red-500 text-white p-2 font-semibold ml-4"
+              >
+                Đăng nhập
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

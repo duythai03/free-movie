@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCaretDown, FaBars } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { resetUser } from "../redux/slices/userSlice";
+import * as UserService from "../service/UserService";
+import { ThemeContext } from "../Context/ThemeContext";
 
 function Menu() {
-  const [isLogin, setIsLogin] = useState(false);
+  const Navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    setIsLogin(false);
-    setMenuOpen(false);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    await UserService.logoutUser();
+    dispatch(resetUser());
+    Navigate("/");
   };
+  console.log("user", user);
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div>
@@ -19,17 +28,14 @@ function Menu() {
           <FaBars />
         </button>
         {menuOpen && (
-          <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg z-10 block p-2 text-black font-medium hover:bg-gray-100">
-            {!isLogin ? (
-              <div
-                // onClick={() => {
-                //   setIsLogin(true);
-                //   setMenuOpen(false);
-                // }}
+          <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg z-50 block p-2 text-black font-medium hover:bg-gray-100">
+            {!user.email ? (
+              <Link
+                to="/login"
                 className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200"
               >
                 Đăng nhập/Đăng ký
-              </div>
+              </Link>
             ) : (
               <>
                 <Link
@@ -39,9 +45,12 @@ function Menu() {
                 >
                   Thông tin người dùng
                 </Link>
-                <div className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200">
+                <Link
+                  to="/fav-movies"
+                  className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200"
+                >
                   Danh sách yêu thích
-                </div>
+                </Link>
                 <div className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200">
                   Lịch sử xem phim
                 </div>
@@ -71,35 +80,53 @@ function Menu() {
 
       {/* Menu for desktop */}
       <div className="hidden md:block">
-        {!isLogin ? (
-          <div
-            // onClick={() => {
-            //   setIsLogin(true);
-            // }}
-            className="cursor-pointer font-semibold"
-          >
+        {!user.email ? (
+          <Link to="/login" className="cursor-pointer font-semibold">
             Đăng nhập/Đăng ký
-          </div>
+          </Link>
         ) : (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end z-50">
             <div
               tabIndex={0}
               role="button"
-              className="btn m-1 bg-mainBlue text-white border-0 hover:bg-mainBlue text-2xl p-0 bg-transparent hover:bg-transparent"
+              className={`btn m-1 text-white border-0 hover:bg-mainBlue text-base p-0 bg-transparent hover:bg-transparent ${
+                theme === "tolight"
+                  ? ""
+                  : "!text-teal-700 !border !border-gray-300 px-4 rounded-lg"
+              }`}
             >
-              Username <FaCaretDown />
+              {user.name} <FaCaretDown />
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu rounded-box z-[1] w-72 p-2 bg-white text-black text-xl shadow-lg"
+              className="dropdown-content menu rounded-box z-[1] w-72 p-2 bg-white text-teal-700 text-lg font-medium shadow-lg"
             >
               <li>
-                <Link to="/profile-user" className="hover:text-mainBlue">
+                <Link
+                  to="/profile-user"
+                  className="hover:bg-gray-100 border-b border-gray-200"
+                >
                   Thông tin người dùng
                 </Link>
               </li>
               <li>
-                <div className="hover:text-mainBlue" onClick={handleLogout}>
+                <Link
+                  to="/fav-movies"
+                  className="block hover:bg-gray-100 border-b border-gray-200"
+                >
+                  Danh sách yêu thích
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/movie-history"
+                  className="block hover:bg-gray-100 border-b border-gray-200"
+                >
+                  Lịch sử xem phim
+                </Link>
+              </li>
+              <li>
+                <div className="hover:bg-gray-100" onClick={handleLogout}>
                   Đăng xuất
                 </div>
               </li>

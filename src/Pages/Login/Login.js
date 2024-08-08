@@ -1,8 +1,69 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login-img.jpg";
+import { validateLogin } from "../../utils/validation";
+import * as UserService from "../../service/UserService";
+import { useMutationHook } from "../../hooks/useMutationHook";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../redux/slices/userSlice";
+import axios from "axios";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const mutation = useMutationHook((data) => UserService.loginUser(data));
+  const { data, isSuccess, isPending } = mutation;
+
+  useEffect(() => {
+    axios.get("https://free-movie-be.vercel.app/gfg-articles").then((res) => {
+      console.log(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("acccess_token", JSON.stringify(data?.access_token));
+      if (data?.access_token) {
+        const user = jwtDecode(data?.access_token);
+        if (user?.id) {
+          handleGetUserDetail(user?.id, data?.access_token);
+          navigate("/");
+        }
+      }
+    }
+  }, [isSuccess]);
+
+  const handleGetUserDetail = async (id, token) => {
+    const res = await UserService.getUserDetail(id, token);
+    dispatch(updateUser({ ...res.data, access_token: token }));
+  };
+
+  console.log("mutation", mutation);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const error = validateLogin(email, password);
+    if (error) {
+      setError(error);
+      return;
+    }
+    mutation.mutate({ email, password });
+    setError("");
+  };
+
   return (
     <div className="h-screen flex justify-center items-center bg-login-bg bg-no-repeat bg-cover relative">
       <div className="absolute inset-0 bg-black opacity-30"></div>
@@ -11,7 +72,7 @@ function Login() {
           <div className="p-[40px]">
             <h4 className="text-2xl font-medium mb-3">FreeMovie xin chào,</h4>
             <p className="text-lg text-gray-800 mb-5">Đăng nhập để tiếp tục</p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px] mb-5">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +86,8 @@ function Login() {
                   type="text"
                   className="grow text-xl"
                   placeholder="Nhập email"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px]">
@@ -44,8 +107,19 @@ function Login() {
                   type="password"
                   className="grow text-xl"
                   placeholder="Mật khẩu"
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
               </label>
+              {error && <p className="text-red-500 text-md mt-4">{error}</p>}
+              {data?.status === "ERR" && (
+                <p className="text-red-500 text-md mt-4">{data?.message}</p>
+              )}
+              {isPending && (
+                <div className="text-center mt-6 delay-200">
+                  <span className="loading loading-spinner text-info scale-125"></span>
+                </div>
+              )}
               <button
                 type="submit"
                 className="btn btn-outline btn-primary w-full h-[50px] text-xl mt-8"

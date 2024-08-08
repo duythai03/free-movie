@@ -1,8 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/login-img.jpg";
+import { validateSignUp } from "../../utils/validation";
+import * as UserService from "../../service/UserService";
+import { useMutationHook } from "../../hooks/useMutationHook";
 
 function SignUp() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const mutation = useMutationHook((data) => UserService.signUpUser(data));
+  const { data, isPending } = mutation;
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const error = validateSignUp(name, email, password, confirmPassword);
+    if (error) {
+      setError(error);
+      return;
+    }
+    mutation.mutate({ name, email, password, confirmPassword });
+    setError("");
+  };
+
   return (
     <div className="h-screen flex justify-center items-center bg-login-bg bg-no-repeat bg-cover relative">
       <div className="absolute inset-0 bg-black opacity-30"></div>
@@ -11,7 +50,24 @@ function SignUp() {
           <div className="p-[40px]">
             <h4 className="text-2xl font-medium mb-3">FreeMovie xin chào,</h4>
             <p className="text-lg text-gray-800 mb-5">Đăng ký để tiếp tục</p>
-            <form>
+            <form onSubmit={handleSubmit}>
+              <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px] mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="h-6 w-6 opacity-70"
+                >
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                </svg>
+                <input
+                  type="text"
+                  className="grow text-xl"
+                  placeholder="Nhập tên tài khoản"
+                  value={name}
+                  onChange={handleNameChange}
+                />
+              </label>
               <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px] mb-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +81,8 @@ function SignUp() {
                   type="text"
                   className="grow text-xl"
                   placeholder="Nhập email"
+                  value={email}
+                  onChange={handleEmailChange}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px] mb-3">
@@ -44,6 +102,8 @@ function SignUp() {
                   type="password"
                   className="grow text-xl"
                   placeholder="Mật khẩu"
+                  value={password}
+                  onChange={handlePasswordChange}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 bg-[#e8f1fe] h-[50px]">
@@ -63,8 +123,22 @@ function SignUp() {
                   type="password"
                   className="grow text-xl"
                   placeholder="Xác nhận mật khẩu"
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
                 />
               </label>
+              {error && <p className="text-red-500 text-md mt-4">{error}</p>}
+              {isPending && (
+                <div className="text-center mt-6 delay-200">
+                  <span className="loading loading-spinner text-info scale-125"></span>
+                </div>
+              )}
+              {data?.status === "ERR" && (
+                <p className="text-red-500 text-md mt-4">{data?.message}</p>
+              )}
+              {data?.status === "OK" && (
+                <p className="text-blue-600 text-md mt-4">{data?.message}</p>
+              )}
               <button
                 type="submit"
                 className="btn btn-outline btn-primary w-full h-[50px] text-xl mt-8"
