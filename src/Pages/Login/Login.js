@@ -20,12 +20,6 @@ function Login() {
   const { data, isSuccess, isPending } = mutation;
 
   useEffect(() => {
-    axios.get("https://free-movie-be.vercel.app/gfg-articles").then((res) => {
-      console.log(res.data);
-    });
-  }, []);
-
-  useEffect(() => {
     if (isSuccess) {
       localStorage.setItem("acccess_token", JSON.stringify(data?.access_token));
       if (data?.access_token) {
