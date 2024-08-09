@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   const handleDecoded = () => {
-    let storageData = localStorage.getItem("acccess_token");
+    let storageData = localStorage.getItem("access_token");
     let user = {};
     if (storageData && isJsonString(storageData)) {
       storageData = JSON.parse(storageData);

@@ -28,7 +28,7 @@ function SearchInput() {
       <input
         type="text"
         placeholder="Tìm kiếm phim..."
-        className="w-40 p-1 pl-3 rounded-full text-black border border-gray-300 focus:outline-none xl:w-80 xl:p-2 xl:pl-6 sm:w-[280px] lg:w-[270px] md:w-40"
+        className="w-40 p-1 pl-3 rounded-full text-black bg-white border border-gray-300 focus:outline-none xl:w-80 xl:p-2 xl:pl-6 sm:w-[280px] lg:w-[270px] md:w-40"
         value={keyword}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}

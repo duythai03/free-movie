@@ -21,7 +21,7 @@ function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem("acccess_token", JSON.stringify(data?.access_token));
+      localStorage.setItem("access_token", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const user = jwtDecode(data?.access_token);
         if (user?.id) {

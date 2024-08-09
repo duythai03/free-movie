@@ -13,9 +13,14 @@ function Menu() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleLogout = async () => {
-    await UserService.logoutUser();
-    dispatch(resetUser());
-    Navigate("/");
+    try {
+      await UserService.logoutUser();
+      dispatch(resetUser());
+      localStorage.removeItem("access_token");
+      Navigate("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
   console.log("user", user);
   const { theme } = useContext(ThemeContext);
