@@ -33,7 +33,7 @@ function Menu() {
           <FaBars />
         </button>
         {menuOpen && (
-          <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg z-50 block p-2 text-black font-medium hover:bg-gray-100">
+          <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg z-50 block p-2 text-black font-medium">
             {!user.email ? (
               <Link
                 to="/login"
@@ -56,9 +56,12 @@ function Menu() {
                 >
                   Danh sách yêu thích
                 </Link>
-                <div className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200">
+                <Link
+                  to="/movie-history"
+                  className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200"
+                >
                   Lịch sử xem phim
-                </div>
+                </Link>
                 <div
                   onClick={handleLogout}
                   className="block p-2 text-black hover:bg-gray-100 border-b border-gray-200"
