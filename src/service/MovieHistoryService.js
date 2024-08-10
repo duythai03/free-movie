@@ -4,7 +4,7 @@ export const axiosJWT = axios.create();
 export const getAllMovies = async (access_token, currentPage) => {
   console.log("service access_token", access_token);
   const res = await axiosJWT.get(
-    `${process.env.REACT_APP_API_URL}/movie-history/get-all-movies?page=${currentPage}&sort=createAt&sort=desc`,
+    `${process.env.REACT_APP_API_URL}/movie-history/get-all-movies?page=${currentPage}`,
     {
       headers: {
         token: `Bearer ${access_token}`,
