@@ -55,15 +55,12 @@ function App() {
   );
 
   const handleGetUserDetail = async (id, token) => {
-    if (!id || !token) {
-      return;
-    } else {
-      try {
-        const res = await UserService.getUserDetail(id, token);
-        dispatch(updateUser({ ...res, access_token: token }));
-      } catch (error) {
-        console.log("Failed to fetch user details:", error);
-      }
+    try {
+      const res = await UserService.getUserDetail(id, token);
+      console.log("res", res);
+      dispatch(updateUser({ ...res.data, access_token: token }));
+    } catch (error) {
+      console.log("Failed to fetch user details:", error);
     }
   };
   const { theme } = useContext(ThemeContext);
