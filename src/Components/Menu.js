@@ -88,13 +88,13 @@ function Menu() {
               {genreOpen && (
                 <div className="ml-4">
                   <Link
-                    to="/type-filter/tinh-cam"
+                    to="/type-filter/kinh-di"
                     className="block p-2 hover:bg-gray-100 border-b border-gray-200"
                   >
                     Kinh Dị
                   </Link>
                   <Link
-                    to="/type-filter/tinh-cam"
+                    to="/type-filter/hanh-dong"
                     className="block p-2 hover:bg-gray-100 border-b border-gray-200"
                   >
                     Hành Động
