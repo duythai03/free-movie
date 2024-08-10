@@ -6,11 +6,14 @@ import { useDispatch } from "react-redux";
 import { resetUser } from "../redux/slices/userSlice";
 import * as UserService from "../service/UserService";
 import { ThemeContext } from "../Context/ThemeContext";
+import { FaAngleRight } from "react-icons/fa6";
 
 function Menu() {
   const Navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const user = useSelector((state) => state.user);
+  const [genreOpen, setGenreOpen] = useState(false);
+  const [countryOpen, setCountryOpen] = useState(false);
   const dispatch = useDispatch();
   const handleLogout = async () => {
     try {
@@ -70,6 +73,214 @@ function Menu() {
                 </div>
               </>
             )}
+            <div className="p-2 border-b border-gray-200">
+              <div
+                onClick={() => setGenreOpen(!genreOpen)}
+                className="flex justify-between items-center cursor-pointer hover:text-teal-500"
+              >
+                Thể loại{" "}
+                <FaAngleRight
+                  className={`transition-transform ${
+                    genreOpen ? "rotate-90" : ""
+                  }`}
+                />
+              </div>
+              {genreOpen && (
+                <div className="ml-4">
+                  <Link
+                    to="/type-filter/tinh-cam"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Kinh Dị
+                  </Link>
+                  <Link
+                    to="/type-filter/tinh-cam"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Hành Động
+                  </Link>
+                  <Link
+                    to="/type-filter/tinh-cam"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Tình Cảm
+                  </Link>
+                  <Link
+                    to="/type-filter/am-nhac"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Âm Nhạc
+                  </Link>
+                  <Link
+                    to="/type-filter/vo-thuat"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Võ Thuật
+                  </Link>
+                  <Link
+                    to="/type-filter/chinh-kich"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Chính Kịch
+                  </Link>
+                  <Link
+                    to="/type-filter/co-trang"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Cổ Trang
+                  </Link>
+                  <Link
+                    to="/type-filter/tai-lieu"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Tài Liệu
+                  </Link>
+                  <Link
+                    to="/type-filter/tam-ly"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Tâm Lý
+                  </Link>
+                  <Link
+                    to="/type-filter/gia-dinh"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Gia Đình
+                  </Link>
+                  <Link
+                    to="/type-filter/khoa-hoc"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Khoa Học
+                  </Link>
+                  <Link
+                    to="/type-filter/bi-an"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Bí Ẩn
+                  </Link>
+                  <Link
+                    to="/type-filter/chien-tranh"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Chiến Tranh
+                  </Link>
+                  <Link
+                    to="/type-filter/hai-huoc"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Hài Hước
+                  </Link>
+                  <Link
+                    to="/type-filter/the-thao"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Thể Thao
+                  </Link>
+                  <Link
+                    to="/type-filter/phieu-luu"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Phiêu Lưu
+                  </Link>
+                  <Link
+                    to="/type-filter/hinh-su"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Hình Sự
+                  </Link>
+                  <Link
+                    to="/type-filter/vien-tuong"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Viễn Tưởng
+                  </Link>
+                  <Link
+                    to="/type-filter/phim-18"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Phim 18+
+                  </Link>
+                </div>
+              )}
+            </div>
+            <div className="p-2 border-b border-gray-200">
+              <div
+                onClick={() => setCountryOpen(!countryOpen)}
+                className="flex justify-between items-center cursor-pointer hover:text-teal-500"
+              >
+                Quốc gia{" "}
+                <FaAngleRight
+                  className={`transition-transform ${
+                    countryOpen ? "rotate-90" : ""
+                  }`}
+                />
+              </div>
+              {countryOpen && (
+                <div className="ml-4">
+                  <Link
+                    to="/country-filter/viet-nam"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Việt Nam
+                  </Link>
+                  <Link
+                    to="/country-filter/au-my"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Âu Mỹ
+                  </Link>
+                  <Link
+                    to="/country-filter/trung-quoc"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Trung Quốc
+                  </Link>
+                  <Link
+                    to="/country-filter/dai-loan"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Đài Loan
+                  </Link>
+                  <Link
+                    to="/country-filter/thai-lan"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Thái Lan
+                  </Link>
+                  <Link
+                    to="/country-filter/an-do"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Ấn Độ
+                  </Link>
+                  <Link
+                    to="/country-filter/anh"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Anh
+                  </Link>
+                  <Link
+                    to="/country-filter/hong-kong"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Hồng Kông
+                  </Link>
+                  <Link
+                    to="/country-filter/han-quoc"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Hàn Quốc
+                  </Link>
+                  <Link
+                    to="/country-filter/nhat-ban"
+                    className="block p-2 hover:bg-gray-100 border-b border-gray-200"
+                  >
+                    Nhật Bản
+                  </Link>
+                </div>
+              )}
+            </div>
             <div className="p-2 border-b border-gray-200 hover:text-teal-500">
               <Link to="/type/tv-shows">Tv show</Link>
             </div>

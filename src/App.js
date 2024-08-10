@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import Profile from "./Pages/Profile/Profile.js";
 import FavMovieList from "./Pages/FavMovieList/FavMovieList.js";
 import MovieHistory from "./Pages/MovieHistory/MovieHistory.js";
+import TypeFilter from "./Pages/MovieFilterPages/TypeFilter.js";
+import CountryFilter from "./Pages/MovieFilterPages/CountryFilter.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,8 +55,16 @@ function App() {
   );
 
   const handleGetUserDetail = async (id, token) => {
-    const res = await UserService.getUserDetail(id, token);
-    dispatch(updateUser({ ...res.data, access_token: token }));
+    if (!id || !token) {
+      return;
+    } else {
+      try {
+        const res = await UserService.getUserDetail(id, token);
+        dispatch(updateUser({ ...res, access_token: token }));
+      } catch (error) {
+        console.log("Failed to fetch user details:", error);
+      }
+    }
   };
   const { theme } = useContext(ThemeContext);
   return (
@@ -73,6 +83,11 @@ function App() {
         <Route path="/movie/:slug" element={<MovieDetail />} />
         <Route path="/recent-movies" element={<RecentMovies />} />
         <Route path="/type/:type_list" element={<OtherMovies />} />
+        <Route path="/type-filter/:type_filter" element={<TypeFilter />} />
+        <Route
+          path="/country-filter/:country_filter"
+          element={<CountryFilter />}
+        />
         <Route path="/search/:search_query" element={<SearchResults />} />
       </Routes>
     </div>
