@@ -300,8 +300,11 @@ function Menu() {
       {/* Menu for desktop */}
       <div className="hidden md:block">
         {!user.email ? (
-          <Link to="/login" className="cursor-pointer font-semibold">
-            Đăng nhập/Đăng ký
+          <Link
+            to="/login"
+            className="cursor-pointer font-semibold border rounded-xl border-gray-500 p-3 whitespace-nowrap"
+          >
+            Đăng nhập
           </Link>
         ) : (
           <div className="dropdown dropdown-end z-50">
