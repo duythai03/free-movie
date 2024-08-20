@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "../../Components/Header";
 import Slider from "./Slider";
 import RecentMoviesList from "./RecentMoviesList";
