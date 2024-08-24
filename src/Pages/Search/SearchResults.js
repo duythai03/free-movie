@@ -43,13 +43,15 @@ function SearchResults() {
       )}
       {error && <p>{error}</p>}
       {!loading && !error && results.length === 0 && (
-        <p
-          className={`text-xl font-semibold mt-4 ml-3 xl:ml-[40px]
+        <div className="flex-grow flex justify-center items-center">
+          <p
+            className={`text-xl font-semibold mt-4 ml-3 xl:ml-[40px]
           ${theme === "tolight" ? "" : "text-black-text"}
           `}
-        >
-          Không tìm thấy kết quả
-        </p>
+          >
+            Không tìm thấy kết quả
+          </p>
+        </div>
       )}
       {!loading && !error && results.length > 0 && (
         <div className="px-2 md:mb-16 md:px-[70px]">

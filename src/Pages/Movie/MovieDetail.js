@@ -384,7 +384,7 @@ function Movie() {
               </button>
               <Link
                 to="/login"
-                className="text-base rounded-lg bg-red-500 text-white p-2 font-semibold ml-4"
+                className="text-base rounded-lg bg-blue-500 text-white p-2 font-semibold ml-4"
               >
                 Đăng nhập
               </Link>

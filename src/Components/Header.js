@@ -46,7 +46,7 @@ function Header() {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-lg z-[1] w-[600px] p-2 shadow grid grid-cols-5 gap-y-2 text-white"
+              className="dropdown-content menu bg-base-100 rounded-lg z-20 w-[600px] p-2 shadow grid grid-cols-5 gap-y-2 text-white"
             >
               <li>
                 <Link to="/type-filter/kinh-di" className="whitespace-nowrap">
@@ -168,7 +168,7 @@ function Header() {
             </div>
             <ul
               tabIndex={0}
-              className="dropdown-content menu bg-base-100 rounded-lg z-[1] w-[600px] p-2 shadow grid grid-cols-5 gap-y-2 text-white"
+              className="dropdown-content menu bg-base-100 rounded-lg z-20 w-[600px] p-2 shadow grid grid-cols-5 gap-y-2 text-white"
             >
               <li>
                 <Link
@@ -261,9 +261,11 @@ function Header() {
           </li>
         </Link>
       </ul>
-      <SearchInput />
-      <ThemeToggle />
-      <Menu />
+      <div className="flex items-center justify-around min-w-[110px]">
+        <SearchInput />
+        <ThemeToggle />
+        <Menu />
+      </div>
     </div>
   );
 }
