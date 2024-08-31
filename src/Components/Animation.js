@@ -10,7 +10,7 @@ const Animation = ({
   useEffect(() => {
     AOS.init({
       duration: duration,
-      once: true, // Animation sẽ chỉ xảy ra một lần khi cuộn xuống.
+      once: false,
     });
   }, [duration]);
 

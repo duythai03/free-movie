@@ -14,19 +14,19 @@ function Home() {
     <div className="">
       <Header />
       <Slider />
-      <Animation animationType="fade-up">
+      <Animation animationType="fade-right">
         <RecentMoviesList />
       </Animation>
-      <Animation animationType="fade-up">
+      <Animation animationType="fade-right">
         <MoviesList />
       </Animation>
-      <Animation animationType="fade-up">
+      <Animation animationType="fade-right">
         <SeriesList />
       </Animation>
-      <Animation animationType="fade-up">
+      <Animation animationType="fade-right">
         <CartoonList />
       </Animation>
-      <Animation animationType="fade-up">
+      <Animation animationType="fade-right">
         <TvshowList />
       </Animation>
       <Footer />
