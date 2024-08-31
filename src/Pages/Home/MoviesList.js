@@ -8,8 +8,6 @@ import { ThemeContext } from "../../Context/ThemeContext";
 
 function MoviesList() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const type = "phim-le";
   const { theme } = useContext(ThemeContext);
 
@@ -20,14 +18,10 @@ function MoviesList() {
         if (res.data.status) {
           const limitedMovies = res.data.data.items.slice(0, 8);
           setMovies(limitedMovies);
-        } else {
-          setError("Failed to fetch movies");
         }
-        setLoading(false);
       })
       .catch((error) => {
-        setError("Error fetching data");
-        setLoading(false);
+        console.log(error);
       });
   }, []);
 

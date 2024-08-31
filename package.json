@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@vidstack/react": "^1.11.29",
+    "aos": "^2.3.4",
     "axios": "^1.7.3",
     "axios-jwt": "^4.0.3",
     "dotenv": "^16.4.5",

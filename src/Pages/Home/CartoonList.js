@@ -8,8 +8,6 @@ import { ThemeContext } from "../../Context/ThemeContext";
 
 function CartoonList() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
@@ -19,14 +17,10 @@ function CartoonList() {
         if (res.data.status) {
           const limitedMovies = res.data.data.items.slice(0, 8);
           setMovies(limitedMovies);
-        } else {
-          setError("Failed to fetch movies");
         }
-        setLoading(false);
       })
       .catch((error) => {
-        setError("Error fetching data");
-        setLoading(false);
+        console.log(error);
       });
   }, []);
 

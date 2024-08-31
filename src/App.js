@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home.js";
 import MovieDetail from "./Pages/Movie/MovieDetail.js";
@@ -21,12 +21,6 @@ import CountryFilter from "./Pages/MovieFilterPages/CountryFilter.js";
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    let { user, storageData } = handleDecoded();
-    if (user?.id) {
-      handleGetUserDetail(user?.id, storageData);
-    }
-  }, []);
 
   const handleDecoded = () => {
     let storageData = localStorage.getItem("access_token");
@@ -37,6 +31,26 @@ function App() {
     }
     return { user, storageData };
   };
+
+  const handleGetUserDetail = useCallback(
+    async (id, token) => {
+      try {
+        const res = await UserService.getUserDetail(id, token);
+        console.log("res", res);
+        dispatch(updateUser({ ...res.data, access_token: token }));
+      } catch (error) {
+        console.log("Failed to fetch user details:", error);
+      }
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    let { user, storageData } = handleDecoded();
+    if (user?.id) {
+      handleGetUserDetail(user?.id, storageData);
+    }
+  }, [handleGetUserDetail]);
 
   UserService.axiosJWT.interceptors.request.use(
     async (config) => {
@@ -49,20 +63,9 @@ function App() {
       return config;
     },
     function (error) {
-      // Do something with request error
       return Promise.reject(error);
     }
   );
-
-  const handleGetUserDetail = async (id, token) => {
-    try {
-      const res = await UserService.getUserDetail(id, token);
-      console.log("res", res);
-      dispatch(updateUser({ ...res.data, access_token: token }));
-    } catch (error) {
-      console.log("Failed to fetch user details:", error);
-    }
-  };
   const { theme } = useContext(ThemeContext);
   return (
     <div

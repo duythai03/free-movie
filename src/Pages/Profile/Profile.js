@@ -20,7 +20,7 @@ function Profile() {
     const { id, ...rests } = data;
     UserService.updateUser(id, rests);
   });
-  const { data, isSuccess, isError } = mutation;
+  const { isSuccess, isError } = mutation;
 
   useEffect(() => {
     if (isSuccess) {

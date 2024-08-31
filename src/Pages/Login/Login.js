@@ -7,7 +7,6 @@ import { useMutationHook } from "../../hooks/useMutationHook";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../redux/slices/userSlice";
-import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");

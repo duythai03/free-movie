@@ -6,8 +6,6 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 function Slider() {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
@@ -16,14 +14,10 @@ function Slider() {
         if (res.data.status) {
           const limitedMovies = res.data.items.slice(0, 6);
           setMovies(limitedMovies);
-        } else {
-          setError("Failed to fetch movies");
         }
-        setLoading(false);
       })
       .catch((error) => {
-        setError("Error fetching data");
-        setLoading(false);
+        console.log(error);
       });
   }, []);
 

@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../Context/ThemeContext";
 import {
-  FaStar,
   FaSquareFacebook,
   FaSquareShareNodes,
   FaSquareReddit,

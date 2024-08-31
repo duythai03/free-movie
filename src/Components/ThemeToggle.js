@@ -6,7 +6,7 @@ import Moon from "../assets/moon.png";
 function ThemeToggle() {
   const context = useContext(ThemeContext);
   return (
-    <div className="sm:mr-4 min-w-8">
+    <div className="sm:mr-4 min-w-8 hover:brightness-75">
       <button onClick={context.toggleTheme}>
         {context.theme === "tolight" ? (
           <img src={Brightness} alt="Light Mode" className="w-8 h-8 mt-1" />

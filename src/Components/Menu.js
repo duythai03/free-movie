@@ -302,7 +302,7 @@ function Menu() {
         {!user.email ? (
           <Link
             to="/login"
-            className="cursor-pointer font-semibold border rounded-xl border-gray-500 p-3 whitespace-nowrap"
+            className="cursor-pointer font-semibold border rounded-xl border-gray-500 p-3 whitespace-nowrap hover:brightness-75"
           >
             Đăng nhập
           </Link>

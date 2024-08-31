@@ -246,7 +246,7 @@ function Header() {
         </div>
         <Link to="/type/phim-le">
           <li
-            className="mr-9 cursor-pointer hidden lg:block font-semibold"
+            className="mr-9 cursor-pointer hidden lg:block font-semibold hover:brightness-75"
             onClick={() => scrollToSection("movies")}
           >
             PHIM ĐIỆN ẢNH
@@ -254,7 +254,7 @@ function Header() {
         </Link>
         <Link to="/type/phim-bo">
           <li
-            className="mr-9 cursor-pointer hidden lg:block font-semibold"
+            className="mr-9 cursor-pointer hidden lg:block font-semibold hover:brightness-75"
             onClick={() => scrollToSection("series")}
           >
             PHIM BỘ
