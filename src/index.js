@@ -17,7 +17,7 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
       <ThemeProvider>
-        <Router>
+        <Router basename="/free-movie">
           <App />
         </Router>
       </ThemeProvider>
