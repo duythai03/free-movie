@@ -111,7 +111,7 @@ function Slider() {
             <img
               src={movie.thumb_url}
               alt={movie.name}
-              className="w-full h-[600px] md:h-[680px] object-cover brightness-50"
+              className="w-full h-[500px] md:h-[600px] object-cover brightness-50"
             />
             <div className="absolute top-[180px] left-[70px] md:left-[110px] flex flex-col">
               <div className=" flex flex-row font-bold text-2xl">
