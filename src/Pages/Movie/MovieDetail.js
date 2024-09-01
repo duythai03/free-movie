@@ -257,14 +257,9 @@ function Movie() {
                   }`}
                 />
                 <div className="mt-6 flex justify-center text-4xl">
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=https://duythai03.github.io/free-movie/movie/${movie.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mr-2 text-[#4165af] flex items-center"
-                  >
+                  <i className="mr-2 text-[#4165af]">
                     <FaSquareFacebook />
-                  </a>
+                  </i>
                   <i className="mr-2 text-[#ff4500]">
                     <FaSquareReddit />
                   </i>
