@@ -49,7 +49,7 @@ function FavMovieList() {
   }, [user.access_token, currentPage, dispatch]);
 
   const handlePageChange = (page) => {
-    dispatch(setCurrentPage({ currentPage: page }));
+    dispatch(setCurrentPage(page));
   };
 
   const handleModal = (movieId) => {
