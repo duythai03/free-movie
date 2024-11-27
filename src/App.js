@@ -1,23 +1,13 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home/Home.js";
-import MovieDetail from "./Pages/Movie/MovieDetail.js";
-import RecentMovies from "./Pages/MovieTypePages/RecentMovies.js";
-import OtherMovies from "./Pages/MovieTypePages/OtherMovies.js";
-import SearchResults from "./Pages/Search/SearchResults.js";
 import { ThemeContext } from "./Context/ThemeContext";
-import Login from "./Pages/Login/Login.js";
-import SignUp from "./Pages/SignUp/SignUp.js";
-import { isJsonString } from "./utils/isJsonString";
-import { jwtDecode } from "jwt-decode";
-import * as UserService from "./service/UserService";
-import { updateUser } from "./redux/slices/userSlice";
-import { useDispatch } from "react-redux";
-import Profile from "./Pages/Profile/Profile.js";
-import FavMovieList from "./Pages/FavMovieList/FavMovieList.js";
-import MovieHistory from "./Pages/MovieHistory/MovieHistory.js";
-import TypeFilter from "./Pages/MovieFilterPages/TypeFilter.js";
-import CountryFilter from "./Pages/MovieFilterPages/CountryFilter.js";
+import { routes } from "./routes/index.js";
+import DefaultLayout from "./Components/DefaultLayout.js";
+// import { isJsonString } from "./utils/isJsonString";
+// import { jwtDecode } from "jwt-decode";
+// import * as UserService from "./service/UserService";
+// import { updateUser } from "./redux/slices/userSlice";
+// import { useDispatch } from "react-redux";
 
 function App() {
   // const dispatch = useDispatch();
@@ -74,21 +64,21 @@ function App() {
       }`}
     >
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile-user" element={<Profile />} />
-        <Route path="/fav-movies" element={<FavMovieList />} />
-        <Route path="/movie-history" element={<MovieHistory />} />
-        <Route path="/movie/:slug" element={<MovieDetail />} />
-        <Route path="/recent-movies" element={<RecentMovies />} />
-        <Route path="/type/:type_list" element={<OtherMovies />} />
-        <Route path="/type-filter/:type_filter" element={<TypeFilter />} />
-        <Route
-          path="/country-filter/:country_filter"
-          element={<CountryFilter />}
-        />
-        <Route path="/search/:search_query" element={<SearchResults />} />
+        {routes.map((route) => {
+          const Page = route.page;
+          const Layout = route.showLayout ? DefaultLayout : React.Fragment;
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
       </Routes>
     </div>
   );

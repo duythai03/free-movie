@@ -1,5 +1,3 @@
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
@@ -54,7 +52,6 @@ function Profile() {
   };
   return (
     <div className="">
-      <Header />
       <div className="min-h-[400px]">
         <div className="max-w-screen-xl mx-auto bg-medium-blue rounded-md text-gray-400 mt-12">
           <div className="p-8">
@@ -136,7 +133,6 @@ function Profile() {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 }

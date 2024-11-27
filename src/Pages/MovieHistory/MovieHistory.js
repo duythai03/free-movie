@@ -1,7 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import * as MovieHistoryService from "../../service/MovieHistoryService";
@@ -70,7 +68,6 @@ function MovieHistory() {
   return (
     <div className="min-h-screen flex flex-col">
       <ToastContainer />
-      <Header />
       {isLoading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -132,7 +129,6 @@ function MovieHistory() {
           />
         </div>
       )}
-      <Footer />
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-4 rounded-lg text-gray-700">

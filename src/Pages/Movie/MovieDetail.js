@@ -7,8 +7,6 @@ import {
   FaSquareShareNodes,
   FaSquareReddit,
 } from "react-icons/fa6";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
@@ -179,7 +177,6 @@ function Movie() {
     <div className="min-h-screen flex flex-col">
       <ToastContainer />
       <div id="fb-root"></div>
-      <Header />
       {loading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -372,7 +369,6 @@ function Movie() {
           </div>
         </div>
       )}
-      <Footer />
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-30">
           <div className="bg-white p-4 rounded-lg text-gray-700">

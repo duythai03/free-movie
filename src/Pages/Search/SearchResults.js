@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import LoadingGif from "../../assets/loading.gif";
 import { ThemeContext } from "../../Context/ThemeContext";
 
@@ -31,7 +29,6 @@ function SearchResults() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       {loading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -83,7 +80,6 @@ function SearchResults() {
           </ul>
         </div>
       )}
-      <Footer />
     </div>
   );
 }

@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
@@ -48,7 +46,6 @@ function RecentMovies() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       {loading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -97,7 +94,6 @@ function RecentMovies() {
           />
         </div>
       )}
-      <Footer />
     </div>
   );
 }

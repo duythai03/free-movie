@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 import Pagination from "../../Components/Pagination";
 import axios from "axios";
 import LoadingGif from "../../assets/loading.gif";
@@ -118,7 +116,6 @@ function TypeFilter() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       {loading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -167,7 +164,6 @@ function TypeFilter() {
           />
         </div>
       )}
-      <Footer />
     </div>
   );
 }
