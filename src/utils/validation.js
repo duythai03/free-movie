@@ -9,7 +9,7 @@ const validateLogin = (email, password) => {
   if (password.length < 6) {
     return "Mật khẩu phải có ít nhất 8 ký tự";
   }
-  return "Chức năng này hiện đang tạm dừng";
+  return "";
 };
 
 const validateSignUp = (name, email, password, confirmPassword) => {
@@ -32,7 +32,7 @@ const validateSignUp = (name, email, password, confirmPassword) => {
   if (password !== confirmPassword) {
     return "Mật khẩu không khớp";
   }
-  return "Chức năng này hiện đang tạm dừng";
+  return "";
 };
 
 export { validateLogin, validateSignUp };
