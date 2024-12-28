@@ -20,6 +20,7 @@ function SearchInput() {
       return;
     }
     const normalizedKeyword = normalize(keyword);
+    setIsSearchVisible(false);
     navigate(`/search/${encodeURIComponent(normalizedKeyword)}`);
   };
 
