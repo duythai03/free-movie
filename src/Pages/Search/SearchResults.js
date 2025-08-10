@@ -15,7 +15,9 @@ function SearchResults() {
       .get(`https://phimapi.com/v1/api/tim-kiem?keyword=${search_query}`)
       .then((res) => {
         if (res.data.status) {
-          setResults(res.data.data.items);
+          setResults(
+            Array.isArray(res.data.data?.items) ? res.data.data.items : []
+          );
         } else {
           setError("Tìm kiếm thất bại");
         }
@@ -38,7 +40,7 @@ function SearchResults() {
           />
         </div>
       )}
-      {error && <p>{error}</p>}
+      {!error && <p>{!error}</p>}
       {!loading && !error && results.length === 0 && (
         <div className="flex-grow flex justify-center items-center">
           <p

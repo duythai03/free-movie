@@ -3,15 +3,47 @@ import { useNavigate } from "react-router-dom";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import normalize from "normalize-text";
 import { ThemeContext } from "../Context/ThemeContext";
+import axios from "axios";
 
 function SearchInput() {
   const [keyword, setKeyword] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [typingTimeout, setTypingTimeout] = useState(null);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const navigate = useNavigate();
   const context = useContext(ThemeContext);
 
   const handleInputChange = (e) => {
-    setKeyword(e.target.value);
+    const value = e.target.value;
+    setKeyword(value);
+    if (typingTimeout) clearTimeout(typingTimeout);
+    setTypingTimeout(
+      setTimeout(() => {
+        if (value.trim()) {
+          axios
+            .get(`https://phimapi.com/v1/api/tim-kiem?keyword=${value}`)
+            .then((res) => {
+              if (res.data.status) {
+                setSuggestions(res.data.data.items.slice(0, 5));
+              } else {
+                setSuggestions([]);
+              }
+            })
+            .catch(() => {
+              setSuggestions([]);
+            });
+        } else {
+          setSuggestions([]);
+        }
+      }, 400)
+    );
+  };
+
+  const handleSuggestionClick = (slug) => {
+    setIsSearchVisible(false);
+    setSuggestions([]);
+    setKeyword("");
+    navigate(`/movie/${slug}`);
   };
 
   const handleSearch = () => {
@@ -21,6 +53,8 @@ function SearchInput() {
     }
     const normalizedKeyword = normalize(keyword);
     setIsSearchVisible(false);
+    setSuggestions([]);
+    setKeyword("");
     navigate(`/search/${encodeURIComponent(normalizedKeyword)}`);
   };
 
@@ -80,6 +114,30 @@ function SearchInput() {
         >
           <FaMagnifyingGlass />
         </i>
+        {suggestions.length > 0 && (
+          <div className="absolute z-10 bg-black bg-opacity-70 rounded-md shadow-md top-[100%] left-0 w-full min-w-[200px] min-h-[70px]">
+            {suggestions.map((item) => (
+              <div
+                key={item.slug}
+                className="flex items-center p-2 hover:bg-gray-700"
+              >
+                <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 mr-2">
+                  <img
+                    src={`https://phimimg.com/${item.poster_url}`}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div
+                  className="text-white text-xs cursor-pointer"
+                  onClick={() => handleSuggestionClick(item.slug)}
+                >
+                  {item.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
