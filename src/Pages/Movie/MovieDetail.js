@@ -30,11 +30,11 @@ function Movie() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [episodes, setEpisodes] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [movieLoaded, setMovieLoaded] = useState(false);
   const { theme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [servers, setServers] = useState([]);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -46,11 +46,8 @@ function Movie() {
         if (res.data.status) {
           const fetchedMovie = res.data.movie;
           setMovie(fetchedMovie);
-          const allServerData = res.data.episodes
-            .map((ep) => ep.server_data)
-            .flat();
-          setEpisodes(allServerData);
-          setSelectedEpisode(allServerData[0]);
+          setServers(res.data.episodes);
+          setSelectedEpisode(res.data.episodes[0]?.server_data[0] || null);
           setMovieLoaded(true);
 
           // Thêm phim vào lịch sử ngay khi dữ liệu được tải
@@ -300,30 +297,45 @@ function Movie() {
             </MediaPlayer>
 
             <div className={`${theme === "tolight" ? "" : "p-4"}`}>
-              {episodes.length > 1 && (
+              {servers.length >= 1 && (
                 <div className="mt-4">
-                  <div className="text-xl font-semibold mb-2">Các tập:</div>
-                  <ul
-                    className={`${
-                      episodes.length > 30
-                        ? "h-96 overflow-y-scroll scrollbar-hide"
-                        : ""
-                    } grid grid-cols-4 gap-3 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4`}
-                  >
-                    {episodes.map((episode, index) => (
-                      <li
-                        key={index}
-                        className={`cursor-pointer p-4 flex justify-center items-center text-center bg-medium-blue ${
-                          episode === selectedEpisode
-                            ? "text-blue-500"
-                            : "text-[#d3d3d3]"
-                        }`}
-                        onClick={() => handleEpisodeClick(episode)}
+                  <div className="space-y-6">
+                    {servers.map((server, serverIndex) => (
+                      <div
+                        key={serverIndex}
+                        className="border-b border-gray-700 pb-4"
                       >
-                        Tập {index + 1}
-                      </li>
+                        <div
+                          className={`text-lg font-medium mb-3 ${
+                            theme === "todark" ? "text-black" : "text-white"
+                          }`}
+                        >
+                          {server.server_name}
+                        </div>
+                        <ul
+                          className={`${
+                            server.server_data.length > 30
+                              ? "h-96 overflow-y-scroll scrollbar-hide"
+                              : ""
+                          } grid grid-cols-4 gap-3 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4`}
+                        >
+                          {server.server_data.map((episode, episodeIndex) => (
+                            <li
+                              key={episodeIndex}
+                              className={`cursor-pointer p-4 flex justify-center items-center text-center bg-medium-blue ${
+                                episode === selectedEpisode
+                                  ? "text-blue-500 border-2 border-blue-500"
+                                  : "text-[#d3d3d3]"
+                              }`}
+                              onClick={() => handleEpisodeClick(episode)}
+                            >
+                              {episode.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
