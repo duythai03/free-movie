@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { ThemeContext } from "../Context/ThemeContext";
@@ -9,8 +9,29 @@ function SearchInput() {
   const [suggestions, setSuggestions] = useState([]);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const mobileSearchRef = useRef(null);
   const navigate = useNavigate();
   const context = useContext(ThemeContext);
+
+  useEffect(() => {
+    if (!isSearchVisible) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        mobileSearchRef.current &&
+        !mobileSearchRef.current.contains(event.target)
+      ) {
+        setIsSearchVisible(false);
+        setSuggestions([]);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSearchVisible]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -34,7 +55,7 @@ function SearchInput() {
         } else {
           setSuggestions([]);
         }
-      }, 400)
+      }, 400),
     );
   };
 
@@ -78,7 +99,10 @@ function SearchInput() {
       </i>
 
       {isSearchVisible && (
-        <div className="fixed top-[80px] left-0 w-screen p-1 z-20 bg-white shadow-md">
+        <div
+          ref={mobileSearchRef}
+          className="fixed top-[80px] left-0 w-screen p-1 z-20 bg-white shadow-md"
+        >
           <div className="relative">
             <input
               type="text"

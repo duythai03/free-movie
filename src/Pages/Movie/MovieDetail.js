@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { ThemeContext } from "../../Context/ThemeContext";
@@ -35,6 +35,20 @@ function Movie() {
   const { theme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servers, setServers] = useState([]);
+
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [resumeTime, setResumeTime] = useState(0);
+  const [pendingSeekTime, setPendingSeekTime] = useState(0);
+  const [shouldLoadPlayer, setShouldLoadPlayer] = useState(false);
+  const playerRef = useRef(null);
+
+  const progressStorageKey = useMemo(() => {
+    if (!slug || !selectedEpisode) return "";
+    const episodeIdentity =
+      selectedEpisode.slug || selectedEpisode.name || selectedEpisode.link_m3u8;
+
+    return `movie_progress:${slug}:${episodeIdentity}`;
+  }, [slug, selectedEpisode]);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -86,7 +100,7 @@ function Movie() {
         };
         const res = await FavMovieService.addMovie(
           user.access_token,
-          movieData
+          movieData,
         );
         dispatch(addFavMovie(res));
         toast.success("Đã thêm vào danh sách yêu thích!");
@@ -132,6 +146,84 @@ function Movie() {
 
   const handleEpisodeClick = (episode) => {
     setSelectedEpisode(episode);
+  };
+
+  const formatSeconds = (seconds) => {
+    const safeSeconds = Math.max(Math.floor(seconds), 0);
+    const hour = Math.floor(safeSeconds / 3600);
+    const minute = Math.floor((safeSeconds % 3600) / 60);
+    const second = safeSeconds % 60;
+
+    if (hour > 0) {
+      return `${hour}:${String(minute).padStart(2, "0")}:${String(
+        second,
+      ).padStart(2, "0")}`;
+    }
+
+    return `${String(minute).padStart(2, "0")}:${String(second).padStart(2, "0")}`;
+  };
+
+  useEffect(() => {
+    setResumeModalOpen(false);
+    setResumeTime(0);
+    setPendingSeekTime(0);
+
+    if (!progressStorageKey) {
+      setShouldLoadPlayer(false);
+      return;
+    }
+
+    const savedTime = Number(localStorage.getItem(progressStorageKey));
+    if (!Number.isNaN(savedTime) && savedTime > 15) {
+      setResumeTime(savedTime);
+      setResumeModalOpen(true);
+      setShouldLoadPlayer(false);
+      return;
+    }
+
+    setShouldLoadPlayer(true);
+  }, [progressStorageKey]);
+
+  const saveProgress = () => {
+    if (!progressStorageKey || !playerRef.current) return;
+
+    const currentTime = playerRef.current.currentTime;
+    const duration = playerRef.current.duration;
+
+    if (!currentTime || Number.isNaN(currentTime) || currentTime < 2) return;
+
+    if (duration && duration - currentTime < 10) {
+      localStorage.removeItem(progressStorageKey);
+      return;
+    }
+
+    localStorage.setItem(progressStorageKey, String(Math.floor(currentTime)));
+  };
+
+  const handleResumeConfirm = () => {
+    setPendingSeekTime(resumeTime);
+    setResumeModalOpen(false);
+    setShouldLoadPlayer(true);
+  };
+
+  const handleResumeCancel = () => {
+    if (progressStorageKey) {
+      localStorage.removeItem(progressStorageKey);
+    }
+    setResumeModalOpen(false);
+    setResumeTime(0);
+    setShouldLoadPlayer(true);
+  };
+
+  const handleMediaCanPlay = () => {
+    if (!pendingSeekTime || !playerRef.current) return;
+
+    const safeSeekTime = Math.min(
+      pendingSeekTime,
+      playerRef.current.duration || pendingSeekTime,
+    );
+    playerRef.current.currentTime = safeSeekTime;
+    setPendingSeekTime(0);
   };
 
   useEffect(() => {
@@ -276,25 +368,42 @@ function Movie() {
             }
           `}
           >
-            <MediaPlayer
-              src={selectedEpisode.link_m3u8}
-              viewType="video"
-              streamType="on-demand"
-              logLevel="warn"
-              crossOrigin
-              playsInline
-              title={movie.name}
-              poster={movie.poster_url}
-              className="mt-2 sm:mt-0"
-            >
-              <MediaProvider>
-                <Poster className="vds-poster" />
-              </MediaProvider>
-              <DefaultVideoLayout
-                thumbnails={movie.thumb_url}
-                icons={defaultLayoutIcons}
-              />
-            </MediaPlayer>
+            {shouldLoadPlayer && selectedEpisode ? (
+              <MediaPlayer
+                ref={playerRef}
+                src={selectedEpisode.link_m3u8}
+                viewType="video"
+                streamType="on-demand"
+                logLevel="warn"
+                crossOrigin
+                playsInline
+                title={movie.name}
+                poster={movie.poster_url}
+                className="mt-2 sm:mt-0"
+                onTimeUpdate={saveProgress}
+                onPause={saveProgress}
+                onEnded={handleResumeCancel}
+                onCanPlay={handleMediaCanPlay}
+              >
+                <MediaProvider>
+                  <Poster className="vds-poster" />
+                </MediaProvider>
+                <DefaultVideoLayout
+                  thumbnails={movie.thumb_url}
+                  icons={defaultLayoutIcons}
+                />
+              </MediaPlayer>
+            ) : (
+              <div
+                className={`mt-2 sm:mt-0 min-h-[220px] md:min-h-[400px] rounded-lg border flex items-center justify-center ${
+                  theme === "tolight"
+                    ? "bg-slate-900/70 border-slate-700 text-slate-200"
+                    : "bg-slate-100 border-slate-200 text-slate-600"
+                }`}
+              >
+                Đang chuẩn bị phát phim...
+              </div>
+            )}
 
             <div className={`${theme === "tolight" ? "" : "p-4"}`}>
               {servers.length >= 1 && (
@@ -400,6 +509,50 @@ function Movie() {
               >
                 Đăng nhập
               </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {resumeModalOpen && (
+        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-40 px-4">
+          <div
+            className={`w-full max-w-md rounded-2xl shadow-2xl p-6 border backdrop-blur-sm ${
+              theme === "tolight"
+                ? "bg-slate-800/95 text-white border-slate-600"
+                : "bg-white/95 text-slate-800 border-slate-200"
+            }`}
+          >
+            <h3 className="text-xl font-bold">Tiếp tục xem phim?</h3>
+            <p
+              className={`mt-3 leading-6 ${
+                theme === "tolight" ? "text-slate-200" : "text-slate-600"
+              }`}
+            >
+              Bạn đã xem đến mốc{" "}
+              <span className="font-semibold">{formatSeconds(resumeTime)}</span>
+              . Bạn có muốn tua đến đoạn đang xem dở không?
+            </p>
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                className={`px-4 py-2 rounded-lg font-semibold transition ${
+                  theme === "tolight"
+                    ? "bg-slate-700 text-white hover:bg-slate-600"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+                onClick={handleResumeCancel}
+              >
+                Xem từ đầu
+              </button>
+              <button
+                className={`px-4 py-2 rounded-lg font-semibold transition ${
+                  theme === "tolight"
+                    ? "bg-cyan-500 text-slate-900 hover:bg-cyan-400"
+                    : "bg-medium-blue text-white hover:opacity-90"
+                }`}
+                onClick={handleResumeConfirm}
+              >
+                Tiếp tục xem
+              </button>
             </div>
           </div>
         </div>
