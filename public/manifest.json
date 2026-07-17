@@ -1,9 +1,9 @@
 {
   "short_name": "FreeMovie",
-  "name": "FreeMovie - Xem phim miễn phí",
+  "name": "FreeMovie - Xem phim miễn phí made by Logan :3",
   "icons": [
     {
-      "src": "FreeMovieLogo.png",
+      "src": "FreeMovieLogov2.png",
       "sizes": "231x108",
       "type": "image/png"
     }
