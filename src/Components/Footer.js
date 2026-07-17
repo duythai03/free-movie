@@ -64,7 +64,7 @@ function Footer() {
               Instgram
             </a>
             <a
-              href="https://github.com/duythai03"
+              href="https://github.com"
               target="blank"
               className="hover:underline block"
             >

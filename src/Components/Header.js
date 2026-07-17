@@ -30,7 +30,7 @@ function Header() {
           <img
             src={Logo}
             alt="FreeMovie"
-            className="h-[35px] md:h-[50px] w-auto md:mr-9"
+            className="h-[60px] md:h-[80px] w-auto md:mr-9"
           />
         </Link>
         <div>

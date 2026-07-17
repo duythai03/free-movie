@@ -4,6 +4,7 @@ import Pagination from "../../Components/Pagination";
 import axios from "axios";
 import LoadingGif from "../../assets/loading.gif";
 import { ThemeContext } from "../../Context/ThemeContext";
+import HoverCard from "../../Components/HoverCard";
 
 function TypeFilter() {
   const [movies, setMovies] = useState([]);
@@ -45,6 +46,17 @@ function TypeFilter() {
       moviesContainerRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPage]);
+
+  const [hoverMovie, setHoverMovie] = useState(null);
+  const [hoverPos, setHoverPos] = useState({ top: 0, left: 0 });
+
+  const handleEnter = (e, movie) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoverPos({ top: rect.top - 24, left: rect.right + 8 });
+    setHoverMovie(movie);
+  };
+
+  const handleLeave = () => setHoverMovie(null);
 
   let type;
   switch (type_filter) {
@@ -139,10 +151,12 @@ function TypeFilter() {
           <ul className="grid grid-cols-2 gap-y-9 xl:gap-y-16 xl:grid-cols-6 justify-items-center mt-8 xl:ml-0 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3">
             {movies.map((movie) => (
               <li
-                className={`w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110 
+                className={`group w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110 
                         ${theme === "tolight" ? "" : "shadow-bigFull"}
                       `}
                 key={movie._id}
+                onMouseEnter={(e) => handleEnter(e, movie)}
+                onMouseLeave={handleLeave}
               >
                 <Link to={`/movie/${movie.slug}`}>
                   <img
@@ -157,6 +171,15 @@ function TypeFilter() {
               </li>
             ))}
           </ul>
+          {hoverMovie && (
+            <div
+              onMouseEnter={() => setHoverMovie(hoverMovie)}
+              onMouseLeave={handleLeave}
+              style={{ position: "fixed", top: hoverPos.top, left: hoverPos.left, zIndex: 9999 }}
+            >
+              <HoverCard movie={hoverMovie} theme={theme} />
+            </div>
+          )}
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}

@@ -127,7 +127,7 @@ function SearchInput() {
                   >
                     <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 mr-2">
                       <img
-                        src={`https://phimimg.com/${item.poster_url}`}
+                        src={`${item.poster_url}`}
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
@@ -171,7 +171,7 @@ function SearchInput() {
               >
                 <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 mr-2">
                   <img
-                    src={`https://phimimg.com/${item.poster_url}`}
+                    src={`${item.poster_url}`}
                     alt={item.name}
                     className="w-full h-full object-cover"
                   />

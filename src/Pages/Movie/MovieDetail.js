@@ -24,6 +24,114 @@ import { addFavMovie } from "../../redux/slices/favMovieSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+function Comments({ movieSlug, theme }) {
+  const storageKey = `comments:${movieSlug}`;
+  const [comments, setComments] = useState([]);
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (saved) setComments(JSON.parse(saved));
+    } catch (e) {
+      // ignore
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(comments));
+    } catch (e) {
+      // ignore
+    }
+  }, [comments, storageKey]);
+
+  const addComment = (e) => {
+    e.preventDefault();
+    if (!text.trim()) return;
+    const c = {
+      id: Date.now(),
+      name: name.trim() || "Khách",
+      text: text.trim(),
+      time: new Date().toISOString(),
+    };
+    setComments((prev) => [c, ...prev]);
+    setName("");
+    setText("");
+  };
+
+  const formatTime = (iso) => {
+    try {
+      return new Date(iso).toLocaleString();
+    } catch (e) {
+      return iso;
+    }
+  };
+
+  return (
+    <div className={`mt-6 ${theme === "tolight" ? "" : "p-4"}`}>
+      <div
+        className={`w-full rounded-lg ${
+          theme === "tolight"
+            ? "bg-slate-800/90 text-white"
+            : "bg-white/95 text-slate-800"
+        } p-4 shadow-sm`}
+      >
+        <h4 className="text-lg font-semibold mb-3">Bình luận phim</h4>
+        <form onSubmit={addComment} className="space-y-3">
+          <div>
+            <input
+              className="w-full px-3 py-2 rounded-md border border-gray-300 bg-transparent"
+              placeholder="Tên (không bắt buộc)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <textarea
+              className="w-full px-3 py-2 rounded-md border border-gray-300 resize-none h-24 bg-transparent"
+              placeholder="Viết bình luận..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className={`px-4 py-2 rounded-md font-semibold ${
+                theme === "tolight" ? "bg-cyan-500 text-slate-900" : "bg-medium-blue text-white"
+              }`}
+            >
+              Gửi
+            </button>
+          </div>
+        </form>
+
+        <div className="mt-4 space-y-4 max-h-96 overflow-y-auto">
+          {comments.length === 0 && (
+            <div className="text-sm text-gray-500">Chưa có bình luận nào.</div>
+          )}
+          {comments.map((c) => (
+            <div key={c.id} className="flex gap-3">
+              <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center font-semibold text-sm">
+                {c.name ? c.name.charAt(0).toUpperCase() : "K"}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <div className="font-semibold">{c.name}</div>
+                  <div className="text-xs text-gray-500 ml-2">{formatTime(c.time)}</div>
+                </div>
+                <div className="mt-1 text-sm leading-relaxed">{c.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Movie() {
   const { slug } = useParams();
   const [movie, setMovie] = useState(null);
@@ -226,37 +334,7 @@ function Movie() {
     setPendingSeekTime(0);
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0&appId=367660879695093";
-    script.async = true;
-    script.defer = true;
-    script.crossOrigin = "anonymous";
-    script.nonce = "Iv8Zus5H";
-    script.onload = () => {
-      if (window.FB) {
-        window.FB.init({
-          appId: "367660879695093",
-          autoLogAppEvents: true,
-          xfbml: true,
-          version: "v20.0",
-        });
-        window.FB.XFBML.parse();
-      }
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.FB) {
-      window.FB.XFBML.parse();
-    }
-  }, [movie]);
+  
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -265,7 +343,6 @@ function Movie() {
   return (
     <div className="min-h-screen flex flex-col">
       <ToastContainer />
-      <div id="fb-root"></div>
       {loading && (
         <div className="flex-grow flex justify-center items-center">
           <img
@@ -476,16 +553,7 @@ function Movie() {
                   ))}
                 </ul>
               </div>
-              <div className="mt-12 text-xl font-semibold">Bình luận phim</div>
-              <div className="bg-white mt-4 w-full">
-                <div
-                  className="fb-comments"
-                  data-href={`https://duythai03.github.io/free-movie/#/movie/${movie.slug}`}
-                  data-width="100%"
-                  data-mobile="autp"
-                  data-numposts="5"
-                ></div>
-              </div>
+              <Comments movieSlug={movie.slug} theme={theme} />
             </div>
           </div>
         </div>

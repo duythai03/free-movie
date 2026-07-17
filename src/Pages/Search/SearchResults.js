@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import LoadingGif from "../../assets/loading.gif";
 import { ThemeContext } from "../../Context/ThemeContext";
+import HoverCard from "../../Components/HoverCard";
 
 function SearchResults() {
   const { search_query } = useParams();
@@ -28,6 +29,19 @@ function SearchResults() {
         setLoading(false);
       });
   }, [search_query]);
+
+  const [hoverMovie, setHoverMovie] = useState(null);
+  const [hoverPos, setHoverPos] = useState({ top: 0, left: 0 });
+
+  const handleEnter = (e, movie) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoverPos({ top: rect.top - 24, left: rect.right + 8 });
+    setHoverMovie(movie);
+  };
+
+  const handleLeave = () => {
+    setHoverMovie(null);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -64,8 +78,10 @@ function SearchResults() {
           <ul className="grid grid-cols-2 gap-y-9 xl:gap-y-16 xl:grid-cols-6 justify-items-center mt-8 xl:ml-0 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3">
             {results.map((movie) => (
               <li
-                className="w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
+                className="group w-[150px] xl:h-[210px] relative transition-transform duration-300 ease-in-out hover:scale-110"
                 key={movie._id}
+                onMouseEnter={(e) => handleEnter(e, movie)}
+                onMouseLeave={handleLeave}
               >
                 <Link to={`/movie/${movie.slug}`}>
                   <img
@@ -80,6 +96,15 @@ function SearchResults() {
               </li>
             ))}
           </ul>
+          {hoverMovie && (
+            <div
+              onMouseEnter={() => setHoverMovie(hoverMovie)}
+              onMouseLeave={handleLeave}
+              style={{ position: "fixed", top: hoverPos.top, left: hoverPos.left, zIndex: 9999 }}
+            >
+              <HoverCard movie={hoverMovie} theme={theme} />
+            </div>
+          )}
         </div>
       )}
     </div>
