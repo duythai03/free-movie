@@ -76,7 +76,7 @@ function RecentMovies() {
               >
                 <Link to={`/movie/${movie.slug}`}>
                   <img
-                    src={movie.poster_url}
+                    src={`${movie.poster_url}`}
                     alt={movie.name}
                     className="w-[150px] h-[210px]  object-cover"
                   />

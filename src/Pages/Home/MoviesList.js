@@ -57,7 +57,7 @@ function MoviesList() {
           >
             <Link to={`/movie/${movie.slug}`}>
               <img
-                src={`https://img.phimapi.com/${movie.poster_url}`}
+                src={`https://phimimg.com/${movie.poster_url}`}
                 alt={movie.name}
                 className="w-[150px] h-[210px] object-cover"
               />
